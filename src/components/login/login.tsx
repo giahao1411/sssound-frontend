@@ -5,15 +5,15 @@ import { Modal } from "@/components/ui/modal";
 import { useToast } from "@/hooks/useToast";
 
 export default function Login() {
-    const { show, ToastUI } = useToast();
+    const { showError, ToastUI } = useToast();
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        show(); // fake error toast
+        showError("Login failed", "Invalid email or password"); // fake error toast
     }
 
     return (
-        <div className="flex h-full items-center justify-center">
+        <div className="min-h-screen flex items-center justify-center">
             {ToastUI}
 
             <div className="w-full max-w-md rounded-xl bg-surface border border-border p-8 shadow-xl">

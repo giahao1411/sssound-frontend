@@ -1,15 +1,35 @@
 import { Outlet } from "react-router-dom";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { ThemeToggle } from "@/components/layouts/theme-toggle";
+import AppHeader from "./layouts/app-header";
+import AppLeftSidebar from "./layouts/app-left-sidebar";
+import AppRightSidebar from "./layouts/app-right-sidebar";
+import AppFooter from "./layouts/app-footer";
 
 export default function AppLayout() {
     return (
-        <div className="min-h-screen bg-background text-foreground">
-            <Outlet />
+        <div className="h-screen bg-background text-foreground flex flex-col">
+            <AppHeader />
+
+            <div className="flex flex-1 overflow-hidden px-3 gap-3">
+                <div className="overflow-auto rounded-xl">
+                    <AppLeftSidebar />
+                </div>
+
+                <main className="flex-1 rounded-xl overflow-auto">
+                    <Outlet />
+                </main>
+
+                <div className="overflow-auto rounded-xl">
+                    <AppRightSidebar />
+                </div>
+            </div>
 
             {/* theme toggle */}
-            <div className="fixed bottom-6 right-6 z-50">
+            <div className="fixed bottom-22 right-5 z-100">
                 <ThemeToggle />
             </div>
+
+            <AppFooter />
         </div>
     );
 }

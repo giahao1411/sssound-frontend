@@ -12,7 +12,7 @@ export default function TestPage() {
     const [image, setImage] = useState<File>();
 
     return (
-        <div className="p-10">
+        <div className="p-10 bg-surface">
             <div className="max-w-2xl mx-auto space-y-10">
                 <h1 className="text-3xl font-bold">UI Playground</h1>
 
@@ -21,7 +21,7 @@ export default function TestPage() {
                     <h2 className="text-lg font-semibold">Date Picker</h2>
                     <DatePicker value={date} onChange={setDate} />
                     {date && (
-                        <p className="text-slate-400">
+                        <p className="text-surface-muted">
                             Selected: {date.toDateString()}
                         </p>
                     )}
