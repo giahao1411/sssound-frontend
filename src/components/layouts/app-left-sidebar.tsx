@@ -39,7 +39,7 @@ export default function AppLeftSidebar() {
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
         >
-            {/* Header */}
+            {/* header */}
             <LeftSidebarHeader
                 collapsed={collapsed}
                 isHover={isHover}
@@ -48,7 +48,7 @@ export default function AppLeftSidebar() {
                 toggle={toggle}
             />
 
-            {/* Body */}
+            {/* body */}
             {!collapsed && (
                 <div
                     ref={searchRef}
@@ -91,16 +91,6 @@ export default function AppLeftSidebar() {
                         </div>
                     </div>
 
-                    {/* <div className="flex items-center gap-2 text-foreground-muted hover:text-foreground hover:scale-105 cursor-pointer">
-                        {!isSearch ? (
-                            <>
-                                <span className="text-xs">Recents</span>
-                                <TfiMenuAlt size={18} />
-                            </>
-                        ) : (
-                            <TfiMenuAlt size={18} />
-                        )}
-                    </div> */}
                     <RecentsDropdown
                         isSearch={isSearch}
                         selectedOption={selectedOption}
@@ -111,7 +101,7 @@ export default function AppLeftSidebar() {
                 </div>
             )}
 
-            {/* Nav */}
+            {/* nav */}
             <nav
                 className={cn(
                     "flex-1 flex flex-col gap-1",
