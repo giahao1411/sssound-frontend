@@ -26,7 +26,7 @@ export default function FooterControl({
     return (
         <div className="flex flex-col items-center gap-1">
             <div className="flex items-center gap-5">
-                {/* Shuffle Button */}
+                {/* shuffle */}
                 <div className="flex flex-col gap-1 items-center justify-center mt-2">
                     <Button
                         variant="ghost"
@@ -47,12 +47,12 @@ export default function FooterControl({
                     />
                 </div>
 
-                {/* Previous */}
+                {/* previous */}
                 <Button variant="ghost" className="p-0">
                     <IoIosSkipBackward size={22} />
                 </Button>
 
-                {/* Play/Pause */}
+                {/* play / pause */}
                 <Button
                     variant="media"
                     className="p-0 w-8 h-8 rounded-full"
@@ -65,12 +65,12 @@ export default function FooterControl({
                     )}
                 </Button>
 
-                {/* Next */}
+                {/* next */}
                 <Button variant="ghost" className="p-0">
                     <IoIosSkipForward size={22} />
                 </Button>
 
-                {/* Repeat Button */}
+                {/* repeat */}
                 <div className="flex flex-col gap-1 items-center justify-center mt-2">
                     <Button
                         variant="ghost"
@@ -100,10 +100,9 @@ export default function FooterControl({
                 </div>
             </div>
 
-            {/* Fake progress bar */}
             <div className="flex items-center justify-center space-x-2 text-xs text-foreground-muted w-full">
                 <span>1:15</span>
-                <RangeInput className="w-96"/>
+                <RangeInput className="w-96" />
                 <span>3:45</span>
             </div>
         </div>
