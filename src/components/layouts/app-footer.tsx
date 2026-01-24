@@ -28,7 +28,7 @@ export default function AppFooter() {
 
     return (
         <footer className="h-20 bg-background/80 px-4 flex items-center justify-between">
-            {/* Track info */}
+            {/* track info */}
             <div className="flex items-center gap-3 min-w-[240px]">
                 <img
                     src="https://picsum.photos/80"
@@ -42,7 +42,7 @@ export default function AppFooter() {
                 </div>
             </div>
 
-            {/* Controls */}
+            {/* controls */}
             <FooterControl
                 handleShuffle={handleShuffle}
                 handleRepeat={handleRepeat}
@@ -52,7 +52,7 @@ export default function AppFooter() {
                 repeated={repeated}
             />
 
-            {/* Volume */}
+            {/* volume */}
             <div className="flex items-center gap-3 min-w-[200px] justify-end">
                 <Volume2 className="w-5 h-5" />
                 <RangeInput

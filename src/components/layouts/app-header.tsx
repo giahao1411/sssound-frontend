@@ -27,7 +27,7 @@ export default function AppHeader() {
                         </Button>
                     </div>
 
-                    {/* Search */}
+                    {/* search */}
                     <div className="relative flex-1 max-w-md hover:transition-all">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground-muted cursor-pointer" />
                         <Input
