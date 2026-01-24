@@ -34,7 +34,7 @@ export default function FooterControl({
                         onClick={handleShuffle}
                     >
                         <Shuffle
-                            className={cn(shuffled ? "text-selected" : "")}
+                            className={cn(shuffled ? "text-success" : "")}
                             size={18}
                         />
                     </Button>
@@ -42,7 +42,7 @@ export default function FooterControl({
                     <span
                         className={cn(
                             "w-1 h-1 rounded-full transition-opacity",
-                            shuffled ? "bg-selected opacity-100" : "opacity-0",
+                            shuffled ? "bg-success opacity-100" : "opacity-0",
                         )}
                     />
                 </div>
@@ -78,11 +78,11 @@ export default function FooterControl({
                         onClick={handleRepeat}
                     >
                         {repeated === "one" ? (
-                            <LuRepeat1 className="text-selected" size={20} />
+                            <LuRepeat1 className="text-success" size={20} />
                         ) : (
                             <LuRepeat
                                 className={`${
-                                    repeated === "all" ? "text-selected" : ""
+                                    repeated === "all" ? "text-success" : ""
                                 }`}
                                 size={20}
                             />

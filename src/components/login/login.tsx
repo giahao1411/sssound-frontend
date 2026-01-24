@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Modal } from "@/components/ui/modal";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Login() {
     const { showError, ToastUI } = useToast();

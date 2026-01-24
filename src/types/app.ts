@@ -6,3 +6,18 @@ export type AppRoute = {
     element: JSX.Element;
     layout?: "auth" | "app";
 };
+
+export type Sections =
+    | "Default"
+    | "Playlists"
+    | "Albums"
+    | "Artists"
+    | "Genres";
+
+export type RecentsOption =
+    | "Recently Played"
+    | "Recently Added"
+    | "Alphabetical"
+    | "Creator";
+
+export type SortOrder = "asc" | "desc";

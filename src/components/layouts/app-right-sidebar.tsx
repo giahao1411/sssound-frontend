@@ -13,7 +13,7 @@ export default function RightSidebar() {
         <aside
             className={cn(
                 "h-screen bg-surface flex flex-col transition-all duration-300",
-                open ? "w-[275px]" : "w-[56px] overflow-hidden",
+                open ? "lg:w-[275px] xl:w-[350px]" : "w-[56px] overflow-hidden",
             )}
             onClick={!open ? toggle : undefined}
             onMouseEnter={() => setIsToggle(true)}
@@ -48,7 +48,7 @@ export default function RightSidebar() {
                     <div className="flex-1 overflow-auto px-3 flex flex-col gap-4">
                         <img
                             src="https://picsum.photos/400"
-                            className="rounded-xl object-cover h-63 w-63"
+                            className="rounded-xl object-cover"
                         />
 
                         <div>
