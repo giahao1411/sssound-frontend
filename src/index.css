@@ -2,14 +2,12 @@
 
 @theme {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-muted-hover: var(--surface-muted-hover);
 
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
-
-  --color-surface: var(--surface);
-  --color-surface-muted: var(--surface-muted);
-
-  --color-selected: var(--selected);
 
   --color-border: var(--border);
 
@@ -24,49 +22,65 @@
 }
 
 :root {
+  /* Background */
   --background: #ffffff;
+  --surface: #f1f5f9;
+  --surface-muted: #e5e7eb;
+  --surface-muted-hover: #d1d5db;
 
+  /* Text */
   --foreground: #0f172a;
-  --foreground-muted: #777070;
+  --foreground-muted: #64748b;
+  --foreground-muted-hover: #475569;
 
-  --surface: #f5f6f7;
-  --surface-muted: #ededee;
+  /* Border */
+  --border: #e2e8f0;
 
-  --selected: #1fc65a;
-
-  --border: #dcdcdc;
-
+  /* Primary */
   --primary: #2563eb;
+  --primary-hover: #1d4ed8;
   --primary-foreground: #ffffff;
 
-  --success: #28d311;
+  /* Success */
+  --success: #16a34a;
+  --success-hover: #15803d;
   --success-foreground: #ffffff;
 
+  /* Danger */
   --danger: #dc2626;
-  --danger-foreground: #6c6969;
+  --danger-hover: #b91c1c;
+  --danger-foreground: #ffffff;
 }
 
 .dark {
+  /* Background */
   --background: #020617;
+  --surface: #0b1220;
+  --surface-muted: #1e293b;
+  --surface-muted-hover: #334155;
 
-  --foreground: #e2e8f0;
+  /* Text */
+  --foreground: #e5e7eb;
   --foreground-muted: #9ca3af;
 
-  --surface: #0f172a;
-  --surface-muted: #1e293b;
-
-  --selected: #1fc65a;
-
+  /* Border */
   --border: #1e293b;
 
+  /* Primary */
   --primary: #3b82f6;
+  --primary-hover: #2563eb;
   --primary-foreground: #ffffff;
 
-  --success: #86efac;
-  --success-foreground: #0f172a;
+  /* Success */
+  --success: #22c55e;
+  --success-hover: #16a34a;
+  --success-foreground: #052e16;
 
+  /* Danger */
   --danger: #f87171;
-  --danger-foreground: #0f172a;
+  --danger-hover: #ef4444;
+  --danger-foreground: #450a0a;
+
 }
 
 /* custom styles for range input */
@@ -91,7 +105,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 input[type="range"]:hover,
 input[type="range"]:focus-visible {
-  background-image: linear-gradient(var(--selected), var(--selected));
+  background-image: linear-gradient(var(--success), var(--success));
 }
 
 /* thumb */
@@ -134,3 +148,13 @@ input[type="range"]:focus-visible::-moz-range-thumb {
   opacity: 1;
   transform: scale(1.1);
 }
+
+/* custom hide scrollbar */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
