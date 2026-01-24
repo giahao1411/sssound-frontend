@@ -7,7 +7,7 @@ import LeftNavItem from "./ui/left-nav-item";
 import { Input } from "../ui/input";
 import { useToggleOutside } from "@/hooks/use-toggle-outside";
 import { RecentsDropdown } from "./ui/recent-dropdown";
-import type { RecentsOption, SortOrder } from "@/types/app";
+import type { RecentsOption, Sections, SortOrder } from "@/types/app";
 
 const navMocks = [
     { icon: <Home />, label: "Home" },
@@ -20,6 +20,8 @@ export default function AppLeftSidebar() {
     const [isHover, setIsHover] = useState(false);
     const [isSearch, setIsSearch] = useState(false);
 
+    // state for sections and recents
+    const [selectedSection, setSelectedSection] = useState<Sections>("Default");
     const [selectedOption, setSelectedOption] =
         useState<RecentsOption>("Recently Played");
     const [order, setOrder] = useState<SortOrder>("desc");
@@ -41,6 +43,8 @@ export default function AppLeftSidebar() {
             <LeftSidebarHeader
                 collapsed={collapsed}
                 isHover={isHover}
+                selectedSection={selectedSection}
+                setSelectedSection={setSelectedSection}
                 toggle={toggle}
             />
 

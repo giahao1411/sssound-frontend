@@ -7,7 +7,12 @@ export type AppRoute = {
     layout?: "auth" | "app";
 };
 
-export type Sections = "Playlists" | "Albums" | "Artists" | "Genres";
+export type Sections =
+    | "Default"
+    | "Playlists"
+    | "Albums"
+    | "Artists"
+    | "Genres";
 
 export type RecentsOption =
     | "Recently Played"

@@ -1,26 +1,23 @@
 import { Button } from "@/components/ui/button";
-import { SECTIONS } from "@/constants/app";
 import { cn } from "@/lib/cn";
-import type { Sections } from "@/types/app";
-import { ChevronLeft, Plus, X } from "lucide-react";
+import { ChevronLeft, Plus } from "lucide-react";
 
 interface LeftSidebarHeaderProps {
     collapsed: boolean;
-    isHover: boolean;
-    selectedSection: Sections;
-    setSelectedSection: (section: Sections) => void;
+    isHover?: boolean;
     toggle: () => void;
 }
+
+const sections = ["Playlists", "Albums", "Artists", "Genres"];
 
 export default function LeftSidebarHeader({
     collapsed,
     isHover,
-    selectedSection,
-    setSelectedSection,
     toggle,
 }: LeftSidebarHeaderProps) {
-    const visibleSections =
-        selectedSection === "Default" ? SECTIONS : [selectedSection];
+    const handleClick = (section: string) => {
+        console.log(`Clicked on section: ${section}`);
+    };
 
     return (
         <div className="sticky top-0 z-10 bg-surface">
@@ -83,28 +80,12 @@ export default function LeftSidebarHeader({
                 <div className="mb-2 relative">
                     <div className="flex items-center gap-1">
                         <div className="flex items-center gap-1 flex-1 overflow-x-auto scroll-smooth no-scrollbar">
-                            {/* remove selected section */}
-                            {selectedSection !== "Default" && (
-                                <div
-                                    onClick={() =>
-                                        setSelectedSection("Default")
-                                    }
-                                    className="p-1 rounded-full bg-surface-muted text-foreground-muted cursor-pointer hover:bg-surface-muted-hover"
-                                >
-                                    <X />
-                                </div>
-                            )}
-
-                            {visibleSections.map((section) => (
+                            {sections.map((section) => (
                                 <Button
                                     key={section}
                                     variant="section"
-                                    className={cn(
-                                        "px-3 py-1.5 rounded-2xl whitespace-nowrap",
-                                        section === selectedSection &&
-                                            "bg-foreground text-background hover:bg-foreground-muted",
-                                    )}
-                                    onClick={() => setSelectedSection(section)}
+                                    className="px-3 py-1 rounded-2xl whitespace-nowrap"
+                                    onClick={() => handleClick(section)}
                                 >
                                     {section}
                                 </Button>
