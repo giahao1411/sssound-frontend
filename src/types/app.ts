@@ -2,7 +2,6 @@ import type { JSX } from "react";
 
 export type AppRoute = {
     path: string;
-    title?: string;
     element: JSX.Element;
     layout?: "auth" | "app";
 };
@@ -21,3 +20,17 @@ export type RecentsOption =
     | "Creator";
 
 export type SortOrder = "asc" | "desc";
+
+export type Position =
+    | "top"
+    | "top-start"
+    | "top-end"
+    | "bottom"
+    | "bottom-start"
+    | "bottom-end"
+    | "left"
+    | "left-start"
+    | "left-end"
+    | "right"
+    | "right-start"
+    | "right-end";

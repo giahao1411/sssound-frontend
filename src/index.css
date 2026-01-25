@@ -8,6 +8,7 @@
 
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-muted-hover: var(--foreground-muted-hover);
 
   --color-border: var(--border);
 
@@ -35,6 +36,7 @@
 
   /* Border */
   --border: #e2e8f0;
+  --border-muted: #cbd5e1;
 
   /* Primary */
   --primary: #2563eb;
@@ -62,9 +64,11 @@
   /* Text */
   --foreground: #e5e7eb;
   --foreground-muted: #9ca3af;
+  --foreground-muted-hover: #d1d5db;
 
   /* Border */
   --border: #1e293b;
+  --border-muted: #334155;
 
   /* Primary */
   --primary: #3b82f6;

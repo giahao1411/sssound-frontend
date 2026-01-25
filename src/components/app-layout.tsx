@@ -16,7 +16,9 @@ export default function AppLayout() {
                 </div>
 
                 <main className="flex-1 rounded-xl overflow-auto">
-                    <Outlet />
+                    <div className="p-10 bg-surface">
+                        <Outlet />
+                    </div>
                 </main>
 
                 <div className="overflow-auto rounded-xl">

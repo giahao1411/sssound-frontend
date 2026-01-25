@@ -1,18 +1,48 @@
-import { Home, Search, Library } from "lucide-react";
+import { Search } from "lucide-react";
 import { useLeftSidebarStore } from "@/store/left-sidebar-store";
 import { cn } from "@/lib/cn";
-import LeftSidebarHeader from "./ui/left-sidebar-header";
-import { useState } from "react";
-import LeftNavItem from "./ui/left-nav-item";
-import { Input } from "../ui/input";
+import { useMemo, useState } from "react";
 import { useToggleOutside } from "@/hooks/use-toggle-outside";
-import { RecentsDropdown } from "./ui/recent-dropdown";
 import type { RecentsOption, Sections, SortOrder } from "@/types/app";
+import type { LibraryItem } from "@/types/library-item";
+import { RecentsDropdown } from "./ui/recent-dropdown";
+import { Input } from "../ui/input";
+import LeftSidebarHeader from "./ui/left-sidebar-header";
+import LibaryItem from "./ui/library-item";
 
-const navMocks = [
-    { icon: <Home />, label: "Home" },
-    { icon: <Search />, label: "Search" },
-    { icon: <Library />, label: "Library" },
+const libItemMocks: LibraryItem[] = [
+    {
+        id: "1",
+        coverImg: "./avatar.jpg",
+        title: "Ng'bthg",
+        type: "Album",
+        artist: "Ngọt",
+        isPinned: true,
+    },
+    {
+        id: "2",
+        coverImg: "./avatar.jpg",
+        title: "Chillhop Essentials - Spring 2023",
+        type: "Playlist",
+        artist: "Various Artists",
+        isPinned: false,
+    },
+    {
+        id: "3",
+        coverImg: "./avatar.jpg",
+        title: "Keshi",
+        type: "Artist",
+        artist: "",
+        isPinned: false,
+    },
+    {
+        id: "4",
+        coverImg: "./avatar.jpg",
+        title: "Suýt 1",
+        type: "EP",
+        artist: "Ngọt",
+        isPinned: true,
+    },
 ];
 
 export default function AppLeftSidebar() {
@@ -29,6 +59,19 @@ export default function AppLeftSidebar() {
     const searchRef = useToggleOutside<HTMLDivElement>(isSearch, () =>
         setIsSearch(false),
     );
+
+    // items ordering - hook useMemo avoid re-calculating on each render
+    const orderedItems = useMemo(() => {
+        const pinned = libItemMocks
+            .filter((item) => item.isPinned)
+            .sort((a, b) => a.title.localeCompare(b.title));
+
+        const normal = libItemMocks
+            .filter((item) => !item.isPinned)
+            .sort((a, b) => a.title.localeCompare(b.title));
+
+        return [...pinned, ...normal];
+    }, []);
 
     return (
         <aside
@@ -101,22 +144,21 @@ export default function AppLeftSidebar() {
                 </div>
             )}
 
-            {/* nav */}
-            <nav
+            {/* items */}
+            <div
                 className={cn(
-                    "flex-1 flex flex-col gap-1",
+                    "flex-1 flex flex-col",
                     collapsed && "items-center mt-3",
                 )}
             >
-                {navMocks.map((item) => (
-                    <LeftNavItem
-                        key={item.label}
-                        icon={item.icon}
-                        label={item.label}
+                {orderedItems.map((item) => (
+                    <LibaryItem
+                        key={item.id}
+                        item={item}
                         collapsed={collapsed}
                     />
                 ))}
-            </nav>
+            </div>
         </aside>
     );
 }
