@@ -3,52 +3,31 @@ import { useLeftSidebarStore } from "@/store/left-sidebar-store";
 import { cn } from "@/lib/cn";
 import { useMemo, useState } from "react";
 import { useToggleOutside } from "@/hooks/use-toggle-outside";
-import type { RecentsOption, Sections, SortOrder } from "@/types/app";
-import type { LibraryItem } from "@/types/library-item";
+import type { Position, RecentsOption, Sections, SortOrder } from "@/types/app";
 import { RecentsDropdown } from "./ui/recent-dropdown";
 import { Input } from "../ui/input";
 import LeftSidebarHeader from "./ui/left-sidebar-header";
-import LibaryItem from "./ui/library-item";
+import {
+    filterBySearch,
+    filterBySection,
+    sortByOrder,
+    sortPinnedFirst,
+} from "@/utils/app-left-sidebar";
+import { libItemMocks } from "@/mocks/left-side-bar";
+import ToolTip from "../ui/tool-tip";
+import LibraryItem from "./ui/library-item";
 
-const libItemMocks: LibraryItem[] = [
-    {
-        id: "1",
-        coverImg: "./avatar.jpg",
-        title: "Ng'bthg",
-        type: "Album",
-        artist: "Ngọt",
-        isPinned: true,
-    },
-    {
-        id: "2",
-        coverImg: "./avatar.jpg",
-        title: "Chillhop Essentials - Spring 2023",
-        type: "Playlist",
-        artist: "Various Artists",
-        isPinned: false,
-    },
-    {
-        id: "3",
-        coverImg: "./avatar.jpg",
-        title: "Keshi",
-        type: "Artist",
-        artist: "",
-        isPinned: false,
-    },
-    {
-        id: "4",
-        coverImg: "./avatar.jpg",
-        title: "Suýt 1",
-        type: "EP",
-        artist: "Ngọt",
-        isPinned: true,
-    },
+const tooltips = [
+    { id: "search-lib-tooltip", content: "Search in Library", position: "top" },
 ];
 
 export default function AppLeftSidebar() {
     const { collapsed, toggle } = useLeftSidebarStore();
     const [isHover, setIsHover] = useState(false);
     const [isSearch, setIsSearch] = useState(false);
+
+    // input search state
+    const [searchInput, setSearchInput] = useState("");
 
     // state for sections and recents
     const [selectedSection, setSelectedSection] = useState<Sections>("Default");
@@ -62,22 +41,35 @@ export default function AppLeftSidebar() {
 
     // items ordering - hook useMemo avoid re-calculating on each render
     const orderedItems = useMemo(() => {
-        const pinned = libItemMocks
-            .filter((item) => item.isPinned)
-            .sort((a, b) => a.title.localeCompare(b.title));
-
-        const normal = libItemMocks
-            .filter((item) => !item.isPinned)
-            .sort((a, b) => a.title.localeCompare(b.title));
-
-        return [...pinned, ...normal];
+        return sortPinnedFirst(libItemMocks);
     }, []);
+
+    // handle section change effect on items
+    const sectionItems = useMemo(() => {
+        return {
+            pinned: filterBySection(orderedItems.pinned, selectedSection),
+            normal: filterBySection(orderedItems.normal, selectedSection),
+        };
+    }, [orderedItems, selectedSection]);
+
+    // handle option change effect on items
+    const optionItems = useMemo(() => {
+        return sortByOrder(sectionItems, order);
+    }, [sectionItems, order]);
+
+    // handle search effect on items
+    const filteredItems = useMemo(() => {
+        const merged = [...optionItems.pinned, ...optionItems.normal];
+
+        if (!isSearch) return merged;
+        return filterBySearch(merged, searchInput);
+    }, [optionItems, isSearch, searchInput]);
 
     return (
         <aside
             className={cn(
-                "min-h-screen bg-surface flex flex-col transition-all duration-300 px-3",
-                collapsed ? "w-[72px]" : "lg:w-[210px] xl:w-[260px]",
+                "bg-surface flex flex-col transition-all duration-300",
+                collapsed ? "px-0 w-[72px]" : "px-3 lg:w-[210px] xl:w-[260px]",
             )}
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
@@ -100,15 +92,17 @@ export default function AppLeftSidebar() {
                     <div className="relative flex-1 h-7">
                         <div
                             className={cn(
-                                "absolute top-1/2 z-1 -translate-y-1/2 text-foreground-muted cursor-pointer",
-                                "hover:text-foreground hover:bg-surface-muted rounded-full",
+                                "absolute top-1/2 z-1 -translate-y-1/2 text-foreground-muted rounded-full cursor-pointer",
+                                "hover:text-foreground hover:bg-surface-muted",
                                 isSearch
                                     ? "pointer-events-none left-1.5"
                                     : "p-1.5",
                             )}
                         >
                             <Search
+                                id="search-lib-tooltip"
                                 size={16}
+                                onMouseDown={(e) => e.preventDefault()}
                                 onClick={() => setIsSearch(true)}
                             />
                         </div>
@@ -124,6 +118,8 @@ export default function AppLeftSidebar() {
                         >
                             <Input
                                 autoFocus={isSearch}
+                                value={searchInput}
+                                onChange={(e) => setSearchInput(e.target.value)}
                                 placeholder="Search in Library..."
                                 className={cn(
                                     "h-full w-8/10 pl-8 text-xs",
@@ -148,17 +144,27 @@ export default function AppLeftSidebar() {
             <div
                 className={cn(
                     "flex-1 flex flex-col",
-                    collapsed && "items-center mt-3",
+                    collapsed && "items-center",
                 )}
             >
-                {orderedItems.map((item) => (
-                    <LibaryItem
-                        key={item.id}
-                        item={item}
-                        collapsed={collapsed}
-                    />
-                ))}
+                {filteredItems &&
+                    filteredItems.map((item) => (
+                        <LibraryItem
+                            key={item.id}
+                            item={item}
+                            collapsed={collapsed}
+                        />
+                    ))}
             </div>
+
+            {tooltips.map((tooltip) => (
+                <ToolTip
+                    key={tooltip.id}
+                    anchorId={tooltip.id}
+                    content={tooltip.content}
+                    position={tooltip.position as Position}
+                />
+            ))}
         </aside>
     );
 }

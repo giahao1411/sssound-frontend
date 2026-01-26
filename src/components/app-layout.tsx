@@ -11,17 +11,17 @@ export default function AppLayout() {
             <AppHeader />
 
             <div className="flex flex-1 overflow-hidden px-3 gap-3">
-                <div className="overflow-auto rounded-xl">
+                <div className="flex overflow-auto rounded-xl">
                     <AppLeftSidebar />
                 </div>
 
                 <main className="flex-1 rounded-xl overflow-auto">
-                    <div className="p-10 bg-surface">
+                    <div className="h-full p-10 bg-surface">
                         <Outlet />
                     </div>
                 </main>
 
-                <div className="overflow-auto rounded-xl">
+                <div className="flex overflow-auto rounded-xl">
                     <AppRightSidebar />
                 </div>
             </div>
