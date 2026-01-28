@@ -43,9 +43,15 @@ export default function LeftSidebarHeader({
                         : "justify-between",
                 )}
             >
-                <div className="flex items-center space-x-2">
+                <div
+                    id="collapse-tooltip"
+                    className="flex items-center space-x-2 cursor-pointer"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        toggle();
+                    }}
+                >
                     <Button
-                        id="collapse-tooltip"
                         variant="ghost"
                         className={cn(
                             "p-0 transition-all duration-200 ease-out",
@@ -55,10 +61,6 @@ export default function LeftSidebarHeader({
                                   ? "opacity-100 scale-100"
                                   : "opacity-0 scale-95 pointer-events-none",
                         )}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            toggle();
-                        }}
                     >
                         <ChevronLeft
                             size={collapsed ? 27 : 20}

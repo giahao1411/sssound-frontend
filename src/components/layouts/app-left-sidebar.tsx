@@ -103,7 +103,7 @@ export default function AppLeftSidebar() {
                                 id="search-lib-tooltip"
                                 size={16}
                                 onMouseDown={(e) => e.preventDefault()}
-                                onClick={() => setIsSearch(true)}
+                                onClick={() => setIsSearch((s) => !s)}
                             />
                         </div>
 
