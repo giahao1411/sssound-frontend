@@ -1,19 +1,30 @@
 import type { Position } from "@/types/app";
 import { Tooltip } from "react-tooltip";
 
-interface TooltipProps {
+interface ToolTipProps {
     anchorId: string;
     content: string;
     position: Position;
 }
 
-export default function ToolTip({ anchorId, content, position }: TooltipProps) {
+export default function ToolTip({ anchorId, content, position }: ToolTipProps) {
     return (
         <Tooltip
             anchorSelect={`#${anchorId}`}
             content={content}
             place={position}
-            className="bg-surface text-foreground border-border"
+            positionStrategy="fixed"
+            delayShow={200}
+            className="
+                bg-surface
+                text-xs
+                text-foreground
+                border
+                border-border
+                px-2 py-1
+                leading-none
+                shadow-sm
+            "
         />
     );
 }

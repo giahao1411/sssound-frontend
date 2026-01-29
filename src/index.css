@@ -11,6 +11,7 @@
   --color-foreground-muted-hover: var(--foreground-muted-hover);
 
   --color-border: var(--border);
+  --color-border-muted: var(--border-muted);
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);

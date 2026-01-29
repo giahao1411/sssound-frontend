@@ -2,10 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Modal } from "@/components/ui/modal";
-import { useToast } from "@/hooks/use-toast";
+import { useToastStore } from "@/store/toasts-store";
+import { useState } from "react";
 
 export default function Login() {
-    const { showError, ToastUI } = useToast();
+    const { showError } = useToastStore();
+    const [isModelOpen, setIsModalOpen] = useState(false);
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -14,8 +16,6 @@ export default function Login() {
 
     return (
         <div className="min-h-screen flex items-center justify-center">
-            {ToastUI}
-
             <div className="w-full max-w-md rounded-xl bg-surface border border-border p-8 shadow-xl">
                 <h1 className="text-2xl font-bold text-foreground text-center mb-2">
                     Sign in
@@ -50,12 +50,9 @@ export default function Login() {
 
                 <div className="mt-6 text-center">
                     <Modal
+                        open={isModelOpen}
+                        onOpenChange={setIsModalOpen}
                         title="Reset password"
-                        trigger={
-                            <Button variant="ghost" className="text-primary">
-                                Forgot password?
-                            </Button>
-                        }
                     >
                         <p className="text-muted-foreground text-sm mb-4">
                             Enter your email to receive a reset link.

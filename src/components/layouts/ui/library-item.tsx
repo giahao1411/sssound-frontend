@@ -2,12 +2,12 @@ import { cn } from "@/lib/cn";
 import type { LibraryItem } from "@/types/library-item";
 import { BsPinAngleFill } from "react-icons/bs";
 
-interface LibaryItemProps {
+interface LibraryItemProps {
     item: LibraryItem;
     collapsed: boolean;
 }
 
-export default function LibaryItem({ item, collapsed }: LibaryItemProps) {
+export default function LibraryItem({ item, collapsed }: LibraryItemProps) {
     return (
         <div className="flex items-center p-2 gap-3 rounded-lg hover:bg-surface-muted cursor-pointer">
             <div className="w-11 h-11 shrink-0 flex items-center justify-center">
