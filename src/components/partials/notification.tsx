@@ -1,13 +1,17 @@
 import { useState } from "react";
 import Switch from "../ui/switch";
-import { followerMocks } from "@/mocks/notification";
-import { formatTime } from "@/utils/time-parser";
+import { followerMocks, postMocks } from "@/mocks/notification";
+import { formatRelativeTime, formatTime } from "@/utils/time-parser";
 import { Button } from "../ui/button";
 import { Settings } from "lucide-react";
 import { cn } from "@/lib/cn";
+import Badge from "./ui/badge";
+import ActionButton from "./ui/action-button";
+import TrackContent from "./ui/track-content";
 
 export default function Notification() {
     const [isRepost, setIsRepost] = useState(false);
+    const [playingTrack, setPlayingTrack] = useState<string | null>(null);
 
     const filteredFollowers = followerMocks
         .sort((a, b) => b.timestamp - a.timestamp)
@@ -86,7 +90,62 @@ export default function Notification() {
                 </div>
 
                 {/* posts body */}
-                <div className=""></div>
+                <div className="grid grid-cols-2 gap-10">
+                    {postMocks.map((post) => (
+                        <div className="flex flex-col gap-4">
+                            {/* post header */}
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-5">
+                                    <img
+                                        src="./avatar.jpg"
+                                        alt="User Avatar"
+                                        className="w-7 h-7 rounded-full"
+                                    />
+
+                                    <span className="text-sm">
+                                        <strong>{post.artist}</strong> posted a{" "}
+                                        {post.type}{" "}
+                                        {formatRelativeTime(post.createdAt)}
+                                    </span>
+                                </div>
+
+                                {/* tags */}
+                                <div className="flex items-center gap-1">
+                                    {post.tags &&
+                                        post.tags.map((tag) => (
+                                            <Badge
+                                                key={tag}
+                                                title={`#${tag}`}
+                                            />
+                                        ))}
+                                </div>
+                            </div>
+
+                            {/* post cover and content */}
+                            <div className="flex items-center gap-5">
+                                <img
+                                    src={post.trackCover}
+                                    alt="Track Cover"
+                                    className="w-32 h-32 rounded-lg"
+                                />
+
+                                <div className="flex flex-col flex-1 items-start gap-12">
+                                    <div className="w-full flex items-center justify-between">
+                                        {/* track info, play button */}
+                                        <TrackContent
+                                            post={post}
+                                            playingTrack={playingTrack}
+                                            setPlayingTrack={setPlayingTrack}
+                                        />
+                                    </div>
+
+                                    {/* action buttons */}
+                                    <ActionButton post={post} />
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

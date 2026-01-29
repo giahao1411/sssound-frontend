@@ -3,6 +3,7 @@ import type { RecentsOption, Sections } from "@/types/app";
 export const SECTIONS: Sections[] = [
     "Playlists",
     "Albums",
+    "EPs",
     "Artists",
     "Genres",
 ];

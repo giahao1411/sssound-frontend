@@ -6,10 +6,13 @@ export type AppRoute = {
     layout?: "auth" | "app";
 };
 
+export type ToastType = "success" | "error" | "info";
+
 export type Sections =
     | "Default"
     | "Playlists"
     | "Albums"
+    | "EPs"
     | "Artists"
     | "Genres";
 
@@ -34,3 +37,5 @@ export type Position =
     | "right"
     | "right-start"
     | "right-end";
+
+export type PostType = "track" | "album" | "playlist" | "repost";

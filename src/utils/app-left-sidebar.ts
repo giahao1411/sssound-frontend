@@ -6,7 +6,8 @@ const typeMap: Record<string, Sections> = {
     Album: "Albums",
     Playlist: "Playlists",
     Artist: "Artists",
-    EP: "Genres",
+    EP: "EPs",
+    Genre: "Genres",
 };
 
 // sort pinned items first, then sort by title

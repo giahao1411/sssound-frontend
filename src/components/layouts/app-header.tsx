@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import { AiFillAppstore, AiOutlineAppstore } from "react-icons/ai";
 import { GoHome, GoHomeFill } from "react-icons/go";
 import { BsBell, BsBellFill } from "react-icons/bs";
-
 import { cn } from "@/lib/cn";
 import ToolTip from "../ui/tool-tip";
 import type { Position } from "@/types/app";

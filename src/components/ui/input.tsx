@@ -11,7 +11,6 @@ export const Input = React.forwardRef<
             className={cn(
                 "w-full rounded-md bg-background border border-foreground px-3 py-2 text-sm text-foreground",
                 "focus:outline-none focus:ring-1 focus:ring-foreground focus:border-foreground",
-                "hover:bg-surface-muted",
                 "placeholder:text-foreground-muted disabled:cursor-not-allowed disabled:opacity-50",
                 className,
             )}
