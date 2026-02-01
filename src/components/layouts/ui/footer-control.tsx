@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import { Shuffle } from "lucide-react";
-import { FaPause, FaPlay } from "react-icons/fa6";
 import { LuRepeat, LuRepeat1 } from "react-icons/lu";
 import { IoIosSkipBackward, IoIosSkipForward } from "react-icons/io";
 import { RangeInput } from "@/components/ui/range-input";
+import PlayButton from "@/components/ui/play-button";
 
 interface FooterControlProps {
     handleShuffle: () => void;
@@ -53,17 +53,7 @@ export default function FooterControl({
                 </Button>
 
                 {/* play / pause */}
-                <Button
-                    variant="media"
-                    className="p-0 w-8 h-8 rounded-full"
-                    onClick={() => setPlaying(!playing)}
-                >
-                    {playing ? (
-                        <FaPause size={18} />
-                    ) : (
-                        <FaPlay className="pl-0.5" size={18} />
-                    )}
-                </Button>
+                <PlayButton playing={playing} setPlaying={setPlaying} />
 
                 {/* next */}
                 <Button variant="ghost" className="p-0">

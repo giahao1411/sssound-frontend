@@ -13,7 +13,7 @@ export default function RightSidebar() {
         <aside
             className={cn(
                 "bg-surface flex flex-col transition-all duration-300",
-                open ? "lg:w-[275px] xl:w-[350px]" : "w-[56px]",
+                open ? "lg:w-[275px] xl:w-[300px] 2xl:w-[350px]" : "w-[56px]",
             )}
             onClick={!open ? toggle : undefined}
             onMouseEnter={() => setIsToggle(true)}

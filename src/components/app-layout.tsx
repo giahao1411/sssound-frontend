@@ -15,8 +15,8 @@ export default function AppLayout() {
                     <AppLeftSidebar />
                 </div>
 
-                <main className="flex-1 rounded-xl overflow-auto">
-                    <div className="h-full p-10 bg-surface">
+                <main className="flex-1 rounded-xl overflow-auto bg-surface p-4">
+                    <div className="h-full">
                         <Outlet />
                     </div>
                 </main>

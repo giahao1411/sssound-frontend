@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
+import PlayButton from "@/components/ui/play-button";
 import type { TrackPost } from "@/types/notification";
 import { formatDuration } from "@/utils/time-parser";
-import { FaPause, FaPlay } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 interface TrackContentProps {
     post: TrackPost;
@@ -20,30 +20,23 @@ export default function TrackContent({
         <div className="w-full flex items-center justify-between">
             {/* track info, play button */}
             <div className="flex items-center gap-4">
-                <Button
-                    variant="media"
-                    disabled={isInModal}
-                    className="p-0 w-11 h-11 rounded-full"
-                    onClick={() =>
+                <PlayButton
+                    playing={playingTrack === post.id}
+                    setPlaying={(playing) =>
                         setPlayingTrack &&
-                        setPlayingTrack(
-                            playingTrack === post.id ? null : post.id,
-                        )
+                        setPlayingTrack(playing ? post.id : null)
                     }
-                >
-                    {playingTrack && <FaPlay className="pl-0.5" size={18} />}
-
-                    {playingTrack === post.id ? (
-                        <FaPause className="pl-0.5" size={18} />
-                    ) : (
-                        <FaPlay className="pl-0.5" size={18} />
-                    )}
-                </Button>
+                    className="w-10 h-10"
+                    isInModal={isInModal}
+                />
 
                 <div className="flex flex-col">
-                    <span className="text-sm text-foreground-muted">
+                    <Link
+                        className="text-sm text-foreground-muted hover:underline"
+                        to={`/profile/${post.artist}`}
+                    >
                         {post.artist}
-                    </span>
+                    </Link>
                     <span className="font-bold">{post.title}</span>
                 </div>
             </div>

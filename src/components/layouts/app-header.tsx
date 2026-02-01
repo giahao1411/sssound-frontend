@@ -38,7 +38,7 @@ export default function AppHeader() {
                             className="h-10 w-10 p-0 rounded-full"
                             variant="ghost"
                         >
-                            <NavLink to="/test">
+                            <NavLink to="/">
                                 {({ isActive }) => {
                                     const className =
                                         "h-6 w-6 hover:transition-all";

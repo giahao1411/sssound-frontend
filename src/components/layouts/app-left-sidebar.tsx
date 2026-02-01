@@ -69,7 +69,7 @@ export default function AppLeftSidebar() {
         <aside
             className={cn(
                 "bg-surface flex flex-col transition-all duration-300",
-                collapsed ? "px-0 w-[72px]" : "px-3 lg:w-[210px] xl:w-[260px]",
+                collapsed ? "px-0 w-[72px]" : "px-3 lg:w-[210px] xl:w-[260px] 2xl:w-[260px]",
             )}
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}

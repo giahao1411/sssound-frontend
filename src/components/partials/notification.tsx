@@ -2,20 +2,33 @@ import { useState } from "react";
 import Switch from "../ui/switch";
 import { followerMocks, postMocks } from "@/mocks/notification";
 import { formatRelativeTime, formatTime } from "@/utils/time-parser";
-import { Button } from "../ui/button";
 import { Settings } from "lucide-react";
 import { cn } from "@/lib/cn";
 import Badge from "./ui/badge";
 import ActionButton from "./ui/action-button";
 import TrackContent from "./ui/track-content";
+import { Link } from "react-router-dom";
+import type { FollowNotification } from "@/types/notification";
 
 export default function Notification() {
+    const [notifications, setNotifications] =
+        useState<FollowNotification[]>(followerMocks);
+
     const [isRepost, setIsRepost] = useState(false);
     const [playingTrack, setPlayingTrack] = useState<string | null>(null);
 
-    const filteredFollowers = followerMocks
+    const filteredFollowers = notifications
         .sort((a, b) => b.timestamp - a.timestamp)
         .slice(0, 6);
+
+    const handleFollow = (noti: FollowNotification) => {
+        setNotifications((prev) =>
+            prev.map((n) =>
+                n.id === noti.id ? { ...n, followed: !n.followed } : n,
+            ),
+        );
+        // handle update to backend here
+    };
 
     return (
         <div className="flex flex-col gap-6">
@@ -23,18 +36,21 @@ export default function Notification() {
             <div className="flex flex-col gap-4">
                 {/* title and settings icon */}
                 <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold">Notifications</span>
+                    <span className="text-xl font-bold">Notifications</span>
                     <Settings className="w-5 h-5 cursor-pointer text-foreground-muted hover:text-foreground" />
                 </div>
 
                 {/* notifications body */}
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 2xl:grid-cols-2 gap-2">
                     {filteredFollowers.map((follower) => (
                         <div
                             key={follower.id}
-                            className="flex item-center justify-between hover:bg-surface-muted p-2 rounded-lg cursor-pointer"
+                            className="flex item-center justify-between p-2 rounded-lg cursor-pointer"
                         >
-                            <div className="flex items-center justify-between">
+                            <Link
+                                to={`/profile/${follower.username}`}
+                                className="flex items-center justify-between"
+                            >
                                 <div className="flex items-center gap-4">
                                     <img
                                         src={follower.avatar}
@@ -52,30 +68,30 @@ export default function Notification() {
                                         </span>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
 
-                            <Button
-                                variant="section"
+                            <span
                                 className={cn(
-                                    "text-xs",
+                                    "text-xs flex items-center hover:opacity-80",
                                     follower.followed &&
                                         "text-success font-bold",
                                 )}
+                                onClick={() => handleFollow(follower)}
                             >
                                 {follower.followed
                                     ? "Following"
                                     : "Follow back"}
-                            </Button>
+                            </span>
                         </div>
                     ))}
                 </div>
             </div>
 
             {/* title and enable status */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col">
                 {/* title and switch */}
                 <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold">
+                    <span className="text-xl font-bold">
                         Hear the latest posts from the people you're following
                     </span>
 
@@ -90,12 +106,12 @@ export default function Notification() {
                 </div>
 
                 {/* posts body */}
-                <div className="grid grid-cols-2 gap-10">
+                <div className="grid grid-cols-1 2xl:grid-cols-2 gap-10 py-6">
                     {postMocks.map((post) => (
                         <div className="flex flex-col gap-4">
                             {/* post header */}
                             <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-5">
+                                <div className="flex items-center gap-3">
                                     <img
                                         src="./avatar.jpg"
                                         alt="User Avatar"
@@ -103,8 +119,13 @@ export default function Notification() {
                                     />
 
                                     <span className="text-sm">
-                                        <strong>{post.artist}</strong> posted a{" "}
-                                        {post.type}{" "}
+                                        <Link
+                                            className="hover:underline"
+                                            to={`/profile/${post.artist}`}
+                                        >
+                                            <strong>{post.artist}</strong>
+                                        </Link>{" "}
+                                        posted a {post.type}{" "}
                                         {formatRelativeTime(post.createdAt)}
                                     </span>
                                 </div>
