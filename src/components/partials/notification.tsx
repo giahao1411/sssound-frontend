@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import Switch from "../ui/switch";
 import { followerMocks, postMocks } from "@/mocks/notification";
