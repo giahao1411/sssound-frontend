@@ -8,11 +8,13 @@ import Badge from "./ui/badge";
 import ActionButton from "./ui/action-button";
 import TrackContent from "./ui/track-content";
 import { Link } from "react-router-dom";
-import type { FollowNotification } from "@/types/notification";
+import type { FollowNotification, TrackPost } from "@/types/notification";
 
 export default function Notification() {
     const [notifications, setNotifications] =
         useState<FollowNotification[]>(followerMocks);
+
+    const [posts, setPosts] = useState<TrackPost[]>(postMocks);
 
     const [isRepost, setIsRepost] = useState(false);
     const [playingTrack, setPlayingTrack] = useState<string | null>(null);
@@ -107,7 +109,7 @@ export default function Notification() {
 
                 {/* posts body */}
                 <div className="grid grid-cols-1 2xl:grid-cols-2 gap-10 py-6">
-                    {postMocks.map((post) => (
+                    {posts.map((post) => (
                         <div className="flex flex-col gap-4">
                             {/* post header */}
                             <div className="flex items-center justify-between">

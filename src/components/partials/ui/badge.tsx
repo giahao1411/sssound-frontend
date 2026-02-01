@@ -14,7 +14,7 @@ export default function Badge({ title, className }: BadgeProps) {
         <div
             className={cn(
                 "px-1.5 py-0 rounded-xl text-sm transition cursor-pointer focus:outline-none",
-                "bg-transparent text-white hover:bg-surface-muted-hover",
+                "bg-transparent text-white hover:opacity-80",
                 bg,
                 className,
             )}

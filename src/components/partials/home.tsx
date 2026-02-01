@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import PlaylistCardRec from "./ui/cards/playlist-card-rec";
 import CardSqr from "./ui/cards/card-sqr";
