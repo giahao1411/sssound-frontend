@@ -31,9 +31,9 @@ export const formatTime = (timestamp: number) => {
     });
 };
 
-export const formatRelativeTime = (timestamp: number) => {
+export const formatRelativeTime = (timestamp: string) => {
     const now = Date.now();
-    const diff = Math.max(0, now - timestamp);
+    const diff = Math.max(0, now - new Date(timestamp).getTime());
 
     const units = [
         { label: "year", ms: 365 * 24 * 60 * 60 * 1000 },
