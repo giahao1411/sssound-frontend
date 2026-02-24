@@ -1,4 +1,4 @@
-import type { ToastType } from "@/types/app";
+import type { ToastType } from "@/types/core/app";
 import { create } from "zustand";
 
 type ToastState = {
