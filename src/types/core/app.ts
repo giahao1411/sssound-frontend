@@ -39,7 +39,3 @@ export type Position =
     | "right"
     | "right-start"
     | "right-end";
-
-export type PostType = "track" | "album" | "playlist" | "repost";
-export type MediaType = "playlist" | "artist" | "album";
-export type TrackType = "single" | "album" | "ep";
