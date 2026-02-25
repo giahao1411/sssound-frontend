@@ -1,4 +1,4 @@
-import type { RecentsOption, Sections } from "@/types/app";
+import type { RecentsOption, Sections } from "@/types/core/app";
 
 export const SECTIONS: Sections[] = [
     "Playlists",
