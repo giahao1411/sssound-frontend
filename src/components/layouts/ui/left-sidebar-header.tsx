@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import ToolTip from "@/components/ui/tool-tip";
 import { SECTIONS } from "@/constants/app";
 import { cn } from "@/lib/cn";
-import type { Position, Sections } from "@/types/app";
+import type { Position, Sections } from "@/types";
 import { ChevronLeft, Plus, X } from "lucide-react";
 
 interface LeftSidebarHeaderProps {

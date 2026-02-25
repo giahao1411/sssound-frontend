@@ -1,31 +1,30 @@
 import PlayButton from "@/components/ui/play-button";
-import type { TrackPost } from "@/types/notification";
+import { usePlayTrack } from "@/hooks/use-play-track";
+import type { Album, Track } from "@/types";
+import { mapToTrack } from "@/utils/map-to-track";
 import { formatDuration } from "@/utils/time-parser";
 import { Link } from "react-router-dom";
 
 interface TrackContentProps {
-    post: TrackPost;
-    playingTrack?: string | null;
+    item: Track | Album;
     isInModal?: boolean;
-    setPlayingTrack?: (trackId: string | null) => void;
 }
 
 export default function TrackContent({
-    post,
-    playingTrack,
+    item,
     isInModal = false,
-    setPlayingTrack,
 }: TrackContentProps) {
+    const { isPlaying, handlePlay } = usePlayTrack(
+        mapToTrack(item.type === "TRACK" ? item : null),
+    );
+
     return (
         <div className="w-full flex items-center justify-between">
             {/* track info, play button */}
             <div className="flex items-center gap-4">
                 <PlayButton
-                    playing={playingTrack === post.id}
-                    setPlaying={(playing) =>
-                        setPlayingTrack &&
-                        setPlayingTrack(playing ? post.id : null)
-                    }
+                    playing={isPlaying}
+                    onToggle={handlePlay}
                     className="w-10 h-10"
                     isInModal={isInModal}
                 />
@@ -33,16 +32,16 @@ export default function TrackContent({
                 <div className="flex flex-col">
                     <Link
                         className="text-sm text-foreground-muted hover:underline"
-                        to={`/profile/${post.artist}`}
+                        to={`/profile/${item.artist.id}`}
                     >
-                        {post.artist}
+                        {item.artist.username}
                     </Link>
-                    <span className="font-bold">{post.title}</span>
+                    <span className="font-bold">{item.title}</span>
                 </div>
             </div>
 
             <span className="text-sm text-foreground-muted">
-                {formatDuration(post.duration)}
+                {formatDuration(item.duration)}
             </span>
         </div>
     );

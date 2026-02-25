@@ -1,4 +1,4 @@
-import type { Position } from "@/types/app";
+import type { Position } from "@/types";
 import { Tooltip } from "react-tooltip";
 
 interface ToolTipProps {

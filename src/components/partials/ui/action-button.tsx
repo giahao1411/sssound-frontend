@@ -2,16 +2,15 @@ import { Modal } from "@/components/ui/modal";
 import ToolTip from "@/components/ui/tool-tip";
 import { cn } from "@/lib/cn";
 import { useToastStore } from "@/store/toasts-store";
-import type { Position } from "@/types/app";
-import type { TrackPost } from "@/types/notification";
 import { formatNumber } from "@/utils/text-parser";
 import { CopyIcon, MoreHorizontal, Repeat2Icon, ShareIcon } from "lucide-react";
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import ShareModal from "./share-modal";
+import type { Album, FeedItem, Position, Track } from "@/types";
 
 interface ActionButtonProps {
-    post: TrackPost;
+    post: FeedItem;
 }
 
 const tooltips = [
@@ -30,28 +29,33 @@ export default function ActionButton({ post }: ActionButtonProps) {
     const [repostedPost, setRepostedPost] = useState(post.reposted);
     const [isOpenModal, setIsOpenModal] = useState(false);
 
-    const [selectedPostModal, setSelectedPostModal] =
-        useState<TrackPost | null>(null);
+    const [selectedPostModal, setSelectedPostModal] = useState<
+        Track | Album | null
+    >(null);
 
     // used hooks
     const { showSuccess } = useToastStore();
 
-    const handleLike = (post: TrackPost) => {
+    const handleLike = (post: FeedItem) => {
         setLikedPost(!likedPost);
-        post.likes += likedPost ? -1 : 1;
+        post.likesCount += likedPost ? -1 : 1;
     };
 
-    const handleRepost = (post: TrackPost) => {
+    const handleRepost = (post: FeedItem) => {
         setRepostedPost(!repostedPost);
-        post.reposts += repostedPost ? -1 : 1;
+        post.repostsCount += repostedPost ? -1 : 1;
     };
 
-    const handleShare = (post: TrackPost) => {
-        setSelectedPostModal(post);
+    const handleShare = (item: FeedItem) => {
+        if (item.type === "TRACK") {
+            setSelectedPostModal(item.track);
+        } else if (item.type === "ALBUM" || item.type === "EP") {
+            setSelectedPostModal(item.album);
+        }
         setIsOpenModal(true);
     };
 
-    const handleCopy = (post: TrackPost) => {
+    const handleCopy = (post: FeedItem) => {
         navigator.clipboard.writeText(`https://sssound.com/track/${post.id}`);
         showSuccess("Copied", "Link has been copied to clipboard");
     };
@@ -68,7 +72,7 @@ export default function ActionButton({ post }: ActionButtonProps) {
                     className={cn(likedPost && "text-success")}
                 />
 
-                <span>{formatNumber(post.likes)}</span>
+                <span>{formatNumber(post.likesCount)}</span>
             </span>
 
             <span
@@ -81,7 +85,7 @@ export default function ActionButton({ post }: ActionButtonProps) {
                     className={cn(repostedPost && "text-success")}
                 />
 
-                <span>{formatNumber(post.reposts)}</span>
+                <span>{formatNumber(post.repostsCount)}</span>
             </span>
 
             <span
@@ -120,9 +124,13 @@ export default function ActionButton({ post }: ActionButtonProps) {
                 <Modal
                     open={isOpenModal}
                     onOpenChange={setIsOpenModal}
-                    title="Share Track"
+                    title={
+                        selectedPostModal.type === "TRACK"
+                            ? "Share Track"
+                            : "Share Album"
+                    }
                 >
-                    <ShareModal trackPost={selectedPostModal} />
+                    <ShareModal item={selectedPostModal} />
                 </Modal>
             )}
         </div>

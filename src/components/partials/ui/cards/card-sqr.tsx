@@ -1,22 +1,20 @@
 import PlayButton from "@/components/ui/play-button";
+import { usePlayTrack } from "@/hooks/use-play-track";
 import { cn } from "@/lib/cn";
-import type { Suggestion } from "@/types/playlist";
+import type { Suggestion } from "@/types";
+import { mapToTrack } from "@/utils/map-to-track";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface PlaylistCardSqrProps {
     item: Suggestion;
-    playing: string | null;
-    setPlaying: (trackId: string | null) => void;
 }
 
 const textClassName = "text-xs truncate";
 
-export default function CardSqr({
-    item,
-    playing,
-    setPlaying,
-}: PlaylistCardSqrProps) {
+export default function CardSqr({ item }: PlaylistCardSqrProps) {
+    const { isPlaying, handlePlay } = usePlayTrack(mapToTrack(item));
+
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -34,15 +32,15 @@ export default function CardSqr({
                 onMouseLeave={() => setIsHovered(false)}
             >
                 <img
-                    src={item.coverImageUrl}
+                    src={item.coverUrl}
                     alt={item.title}
                     className={cn(
                         "w-30 h-30 xl:w-38 xl:h-38 object-cover",
-                        item.type === "artist" ? "rounded-full" : "rounded-lg",
+                        item.type === "ARTIST" ? "rounded-full" : "rounded-lg",
                     )}
                 />
 
-                {item.type !== "artist" && (
+                {item.type !== "ARTIST" && (
                     <div
                         onClick={(e) => {
                             e.preventDefault();
@@ -57,12 +55,10 @@ export default function CardSqr({
                         )}
                     >
                         <PlayButton
-                            playing={playing === item.id}
-                            setPlaying={(next) =>
-                                setPlaying(next ? item.id : null)
-                            }
                             className="w-15 h-15"
                             iconSize={24}
+                            playing={isPlaying}
+                            onToggle={handlePlay}
                         />
                     </div>
                 )}
@@ -73,7 +69,7 @@ export default function CardSqr({
                     className={cn(
                         "text-foreground font-bold",
                         textClassName,
-                        item.type === "artist" && "text-center",
+                        item.type === "ARTIST" && "text-center",
                     )}
                 >
                     {item.title}

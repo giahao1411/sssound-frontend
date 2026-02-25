@@ -1,33 +1,25 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react";
 import PlaylistCardRec from "./ui/cards/playlist-card-rec";
 import CardSqr from "./ui/cards/card-sqr";
-import {
-    recentlyPlayedMocks,
-    recommendMocks,
-    suggestionMocks,
-} from "@/mocks/playlist";
-import type { Suggestion } from "@/types/playlist";
+// import {
+//     recentlyPlayedMocks,
+//     recommendMocks,
+//     suggestionMocks,
+// } from "@/mocks/playlist";
 import ScrollingRow from "./ui/scrolling-row";
 import NewTrackCard from "./ui/cards/new-track-card";
 import CardWithCover from "./ui/cards/card-with-cover";
-import type { Track } from "@/types/track";
+import { useSharedDataStore } from "@/store/shared-data-store";
 
 const headerClassName = "text-xl font-bold";
 
 export default function Home() {
-    const [playing, setPlaying] = useState<string | null>(null);
-    const [playingTrack, setPlayingTrack] = useState<string | null>(null);
-
-    const [suggestions, setSuggestions] =
-        useState<Suggestion[]>(suggestionMocks);
-    const [recentlyPlayed, setRecentlyPlayed] =
-        useState<Suggestion[]>(recentlyPlayedMocks);
-    const [recommendTracks, setRecommendTracks] =
-        useState<Track[]>(recommendMocks);
+    // used shared data store
+    const { suggestions, recentlyPlayed, recommendTracks } = useSharedDataStore(
+        (state) => state,
+    );
 
     const filteredRecentPlayed = recentlyPlayed
-        .sort((a, b) => b.lastPlayedTimestamp! - a.lastPlayedTimestamp!)
+        .sort((a, b) => b.lastPlayedAt - a.lastPlayedAt)
         .slice(0, 8);
 
     return (
@@ -40,8 +32,6 @@ export default function Home() {
                         <PlaylistCardRec
                             key={playlist.id}
                             playlist={playlist}
-                            playingTrack={playingTrack}
-                            setPlayingTrack={setPlayingTrack}
                         />
                     ))}
                 </div>
@@ -52,12 +42,7 @@ export default function Home() {
 
                 <ScrollingRow>
                     {suggestions.map((item) => (
-                        <CardSqr
-                            key={item.id}
-                            item={item}
-                            playing={playing}
-                            setPlaying={setPlaying}
-                        />
+                        <CardSqr key={item.id} item={item} />
                     ))}
                 </ScrollingRow>
             </div>
@@ -74,12 +59,7 @@ export default function Home() {
 
                 <ScrollingRow>
                     {suggestions.map((item) => (
-                        <CardSqr
-                            key={item.id}
-                            item={item}
-                            playing={playing}
-                            setPlaying={setPlaying}
-                        />
+                        <CardSqr key={item.id} item={item} />
                     ))}
                 </ScrollingRow>
             </div>
@@ -91,24 +71,14 @@ export default function Home() {
 
                 <ScrollingRow>
                     {suggestions.map((item) => (
-                        <CardSqr
-                            key={item.id}
-                            item={item}
-                            playing={playing}
-                            setPlaying={setPlaying}
-                        />
+                        <CardSqr key={item.id} item={item} />
                     ))}
                 </ScrollingRow>
             </div>
 
             <div className="grid grid-cols-1 px-20 xl:px-36 2xl:px-12 2xl:grid-cols-2 gap-6 2xl:gap-x-12 2xl:gap-y-8">
                 {recommendTracks.map((item) => (
-                    <CardWithCover
-                        key={item.id}
-                        item={item}
-                        playing={playing}
-                        setPlaying={setPlaying}
-                    />
+                    <CardWithCover key={item.id} item={item} />
                 ))}
             </div>
         </div>

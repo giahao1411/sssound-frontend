@@ -10,7 +10,7 @@ interface FooterControlProps {
     handleShuffle: () => void;
     handleRepeat: () => void;
     playing: boolean;
-    setPlaying: (playing: boolean) => void;
+    toggle: () => void;
     shuffled: boolean;
     repeated: "off" | "one" | "all";
 }
@@ -19,7 +19,7 @@ export default function FooterControl({
     handleShuffle,
     handleRepeat,
     playing,
-    setPlaying,
+    toggle,
     shuffled,
     repeated,
 }: FooterControlProps) {
@@ -53,7 +53,7 @@ export default function FooterControl({
                 </Button>
 
                 {/* play / pause */}
-                <PlayButton playing={playing} setPlaying={setPlaying} />
+                <PlayButton playing={playing} onToggle={toggle} />
 
                 {/* next */}
                 <Button variant="ghost" className="p-0">

@@ -1,37 +1,35 @@
 import PlayButton from "@/components/ui/play-button";
+import { usePlayTrack } from "@/hooks/use-play-track";
 import { cn } from "@/lib/cn";
-import type { Track } from "@/types/track";
+import type { Suggestion } from "@/types";
+import { mapToTrack } from "@/utils/map-to-track";
 import { CirclePlus, MoreHorizontal, VolumeOff } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface CardWithCoverProps {
-    item: Track;
-    playing: string | null;
-    setPlaying: (playing: string | null) => void;
+    item: Suggestion;
 }
 
 const iconClassName =
     "text-white/70 hover:text-white hover:scale-103 transition-color";
 
-export default function CardWithCover({
-    item,
-    playing,
-    setPlaying,
-}: CardWithCoverProps) {
+export default function CardWithCover({ item }: CardWithCoverProps) {
+    const { isPlaying, handlePlay } = usePlayTrack(mapToTrack(item));
+
     const [isHovered, setIsHovered] = useState(false);
 
     return (
         <div className="flex flex-col gap-2">
             <span className="text-xs text-foreground-muted select-none">
-                More like {item.artist}
+                More like {item.artist.username}
             </span>
 
             {/* using img for background cover */}
             <div
                 className="flex flex-col flex-shrink-0 cursor-pointer rounded-lg overflow-hidden"
                 style={{
-                    backgroundImage: `url(${item.coverImageUrl})`,
+                    backgroundImage: `url(${item.coverUrl})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                 }}
@@ -40,7 +38,7 @@ export default function CardWithCover({
                 <div
                     className={cn(
                         "flex flex-col justify-between",
-                        "bg-foreground/40 backdrop-blur-xs rounded-lg p-4 pb-6",
+                        "bg-black/40 backdrop-blur-xs rounded-lg p-4 pb-6",
                         "min-h-[490px] xl:min-h-[580px] 2xl:min-h-[600px]",
                     )}
                     onMouseEnter={() => setIsHovered(true)}
@@ -49,7 +47,7 @@ export default function CardWithCover({
                     {/* top section */}
                     <div className="flex items-center gap-4">
                         <img
-                            src={item.coverImageUrl}
+                            src={item.coverUrl}
                             alt="Cover"
                             className="w-26 h-26 object-cover rounded-md shadow-lg"
                         />
@@ -68,10 +66,10 @@ export default function CardWithCover({
                                     •{" "}
                                 </span>
                                 <Link
-                                    to={`/artist/${item.artist}`}
+                                    to={`/artist/${item.artist.id}`}
                                     className="text-white/80 hover:underline"
                                 >
-                                    {item.artist}
+                                    {item.artist.username}
                                 </Link>
                             </span>
                         </div>
@@ -106,10 +104,8 @@ export default function CardWithCover({
                             <CirclePlus size={30} className={iconClassName} />
 
                             <PlayButton
-                                playing={playing === item.id}
-                                setPlaying={(next) =>
-                                    setPlaying(next ? item.id : null)
-                                }
+                                playing={isPlaying}
+                                onToggle={handlePlay}
                                 className={cn(
                                     "w-12 h-12 bg-white text-black",
                                     "hover:bg-white/90 hover:scale-103 transition-transform",

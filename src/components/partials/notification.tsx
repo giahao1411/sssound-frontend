@@ -1,37 +1,36 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import Switch from "../ui/switch";
-import { followerMocks, postMocks } from "@/mocks/notification";
+// import { followerMocks, postMocks } from "@/mocks/notification";
 import { formatRelativeTime, formatTime } from "@/utils/time-parser";
 import { Settings } from "lucide-react";
-import { cn } from "@/lib/cn";
+// import { cn } from "@/lib/cn";
 import Badge from "./ui/badge";
 import ActionButton from "./ui/action-button";
 import TrackContent from "./ui/track-content";
 import { Link } from "react-router-dom";
-import type { FollowNotification, TrackPost } from "@/types/notification";
+import { useSharedDataStore } from "@/store/shared-data-store";
+import type { Notification } from "@/types";
+
+const content = {
+    NEW_TRACK: "released a new track",
+    NEW_ALBUM: "released a new album",
+    NEW_EP: "released a new EP",
+    LIKE_TRACK: "liked your track",
+    LIKE_ALBUM: "liked your album",
+    LIKE_EP: "liked your EP",
+    REPOST_TRACK: "reposted your track",
+    REPOST_ALBUM: "reposted your album",
+    REPOST_EP: "reposted your EP",
+};
 
 export default function Notification() {
-    const [notifications, setNotifications] =
-        useState<FollowNotification[]>(followerMocks);
-
-    const [posts, setPosts] = useState<TrackPost[]>(postMocks);
+    const { notifications, posts } = useSharedDataStore((state) => state);
 
     const [isRepost, setIsRepost] = useState(false);
-    const [playingTrack, setPlayingTrack] = useState<string | null>(null);
 
-    const filteredFollowers = notifications
+    const filteredNotifications = notifications
         .sort((a, b) => b.timestamp - a.timestamp)
         .slice(0, 6);
-
-    const handleFollow = (noti: FollowNotification) => {
-        setNotifications((prev) =>
-            prev.map((n) =>
-                n.id === noti.id ? { ...n, followed: !n.followed } : n,
-            ),
-        );
-        // handle update to backend here
-    };
 
     return (
         <div className="flex flex-col gap-6">
@@ -45,46 +44,35 @@ export default function Notification() {
 
                 {/* notifications body */}
                 <div className="grid grid-cols-1 2xl:grid-cols-2 gap-2">
-                    {filteredFollowers.map((follower) => (
+                    {filteredNotifications.map((noti) => (
                         <div
-                            key={follower.id}
+                            key={noti.id}
                             className="flex item-center justify-between p-2 rounded-lg cursor-pointer"
                         >
                             <Link
-                                to={`/profile/${follower.username}`}
+                                to={`/profile/${noti.sender.id}`}
                                 className="flex items-center justify-between"
                             >
                                 <div className="flex items-center gap-4">
                                     <img
-                                        src={follower.avatar}
-                                        alt={follower.username}
+                                        src={noti.sender.avatarUrl}
+                                        alt={noti.sender.username}
                                         className="w-10 h-10 rounded-full"
                                     />
 
                                     <div className="flex flex-col items-start text-xs">
                                         <span>
-                                            <strong>{follower.username}</strong>{" "}
-                                            is following you
+                                            <strong>
+                                                {noti.sender.username}
+                                            </strong>{" "}
+                                            {content[noti.type]}
                                         </span>
                                         <span>
-                                            {formatTime(follower.timestamp)}
+                                            {formatTime(noti.timestamp)}
                                         </span>
                                     </div>
                                 </div>
                             </Link>
-
-                            <span
-                                className={cn(
-                                    "text-xs flex items-center hover:opacity-80",
-                                    follower.followed &&
-                                        "text-success font-bold",
-                                )}
-                                onClick={() => handleFollow(follower)}
-                            >
-                                {follower.followed
-                                    ? "Following"
-                                    : "Follow back"}
-                            </span>
                         </div>
                     ))}
                 </div>
@@ -124,9 +112,9 @@ export default function Notification() {
                                     <span className="text-sm">
                                         <Link
                                             className="hover:underline"
-                                            to={`/profile/${post.artist}`}
+                                            to={`/profile/${post.artist.id}`}
                                         >
-                                            <strong>{post.artist}</strong>
+                                            <strong>{post.artist.username}</strong>
                                         </Link>{" "}
                                         posted a {post.type}{" "}
                                         {formatRelativeTime(post.createdAt)}
@@ -134,21 +122,24 @@ export default function Notification() {
                                 </div>
 
                                 {/* tags */}
-                                <div className="flex items-center gap-1">
-                                    {post.tags &&
-                                        post.tags.map((tag) => (
-                                            <Badge
-                                                key={tag}
-                                                title={`#${tag}`}
-                                            />
-                                        ))}
-                                </div>
+                                {post.type === "TRACK" ||
+                                    (post.type === "REPOST_TRACK" && (
+                                        <div className="flex items-center gap-1">
+                                            {post.track.tags &&
+                                                post.track.tags.map((tag) => (
+                                                    <Badge
+                                                        key={tag}
+                                                        title={`#${tag}`}
+                                                    />
+                                                ))}
+                                        </div>
+                                    ))}
                             </div>
 
                             {/* post cover and content */}
                             <div className="flex items-center gap-5">
                                 <img
-                                    src={post.trackCover}
+                                    src={post.coverImage}
                                     alt="Track Cover"
                                     className="w-32 h-32 rounded-lg"
                                 />
@@ -156,11 +147,7 @@ export default function Notification() {
                                 <div className="flex flex-col flex-1 items-start gap-12">
                                     <div className="w-full flex items-center justify-between">
                                         {/* track info, play button */}
-                                        <TrackContent
-                                            post={post}
-                                            playingTrack={playingTrack}
-                                            setPlayingTrack={setPlayingTrack}
-                                        />
+                                        <TrackContent item={post} />
                                     </div>
 
                                     {/* action buttons */}

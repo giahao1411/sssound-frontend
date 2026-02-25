@@ -4,7 +4,7 @@ import { cn } from "@/lib/cn";
 
 interface PlayButtonProps {
     playing: boolean;
-    setPlaying: (playing: boolean) => void;
+    onToggle: () => void;
     className?: string;
     iconSize?: number;
     isInModal?: boolean;
@@ -12,7 +12,7 @@ interface PlayButtonProps {
 
 export default function PlayButton({
     playing,
-    setPlaying,
+    onToggle,
     className,
     iconSize = 18,
     isInModal,
@@ -22,7 +22,7 @@ export default function PlayButton({
             variant="media"
             disabled={isInModal}
             className={cn("p-0 w-8 h-8 rounded-full", className)}
-            onClick={() => setPlaying && setPlaying(!playing)}
+            onClick={onToggle}
         >
             {playing && isInModal && (
                 <FaPlay className="pl-0.5" size={iconSize} />

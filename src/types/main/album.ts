@@ -8,6 +8,7 @@ export interface Album extends Engagement {
     title: string;
     description?: string;
     coverUrl?: string;
+    duration: number;
     type: AlbumType;
 
     artist: User;

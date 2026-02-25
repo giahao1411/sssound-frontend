@@ -7,7 +7,7 @@ import { GoHome, GoHomeFill } from "react-icons/go";
 import { BsBell, BsBellFill } from "react-icons/bs";
 import { cn } from "@/lib/cn";
 import ToolTip from "../ui/tool-tip";
-import type { Position } from "@/types/app";
+import type { Position } from "@/types";
 
 const tooltips = [
     { id: "user-tooltip", content: "Profile", position: "bottom" },

@@ -1,20 +1,18 @@
 import PlayButton from "@/components/ui/play-button";
+import { usePlayTrack } from "@/hooks/use-play-track";
 import { cn } from "@/lib/cn";
-import type { Suggestion } from "@/types/playlist";
+import type { Suggestion } from "@/types";
+import { mapToTrack } from "@/utils/map-to-track";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface PlaylistCardRecProps {
     playlist: Suggestion;
-    playingTrack: string | null;
-    setPlayingTrack: (trackId: string | null) => void;
 }
 
-export default function PlaylistCardRec({
-    playlist,
-    playingTrack,
-    setPlayingTrack,
-}: PlaylistCardRecProps) {
+export default function PlaylistCardRec({ playlist }: PlaylistCardRecProps) {
+    const { isPlaying, handlePlay } = usePlayTrack(mapToTrack(playlist));
+
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -29,7 +27,7 @@ export default function PlaylistCardRec({
         >
             <div className="flex items-center gap-2">
                 <img
-                    src={playlist.coverImageUrl}
+                    src={playlist.coverUrl}
                     alt={playlist.title}
                     className="w-12 h-12 2xl:w-16 2xl:h-16 object-cover rounded-l-sm"
                 />
@@ -44,12 +42,7 @@ export default function PlaylistCardRec({
                 }}
                 className={cn("p-2", isHovered ? "opacity-100" : "opacity-0")}
             >
-                <PlayButton
-                    playing={playingTrack === playlist.id}
-                    setPlaying={(playing) =>
-                        setPlayingTrack(playing ? playlist.id : null)
-                    }
-                />
+                <PlayButton playing={isPlaying} onToggle={handlePlay} />
             </div>
         </Link>
     );

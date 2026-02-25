@@ -1,4 +1,5 @@
 import type { SuggestionType } from "../core/media";
+import type { User } from "../main/user";
 
 export interface PlayingTrack {
     id: string;
@@ -12,6 +13,8 @@ export interface Suggestion {
     id: string;
     title: string;
     type: SuggestionType;
+
+    artist: User;
 
     description?: string;
     audioUrl?: string;
