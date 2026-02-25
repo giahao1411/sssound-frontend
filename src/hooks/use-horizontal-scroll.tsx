@@ -1,5 +1,5 @@
+import type { Direction } from "@/types";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { Direction } from "@/types/app";
 
 interface UseHorizontalScrollOptions {
     cardSelector?: string;
