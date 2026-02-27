@@ -3,14 +3,16 @@ import { useState } from "react";
 
 import { RangeInput } from "../ui/range-input";
 import FooterControl from "./ui/footer-control";
+import { usePlayTrackStore } from "@/store/play-music-store";
 
 type RepeatState = "off" | "one" | "all";
 
 export default function AppFooter() {
-    const [playing, setPlaying] = useState(true);
     const [shuffled, setShuffled] = useState(false);
     const [repeated, setRepeated] = useState<RepeatState>("off");
     const [volume, setVolume] = useState(70);
+
+    const { playing, toggle } = usePlayTrackStore();
 
     const handleShuffle = () => {
         setShuffled(!shuffled);
@@ -47,7 +49,7 @@ export default function AppFooter() {
                 handleShuffle={handleShuffle}
                 handleRepeat={handleRepeat}
                 playing={playing}
-                setPlaying={setPlaying}
+                toggle={toggle}
                 shuffled={shuffled}
                 repeated={repeated}
             />

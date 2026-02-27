@@ -3,7 +3,6 @@ import { useLeftSidebarStore } from "@/store/left-sidebar-store";
 import { cn } from "@/lib/cn";
 import { useMemo, useState } from "react";
 import { useToggleOutside } from "@/hooks/use-toggle-outside";
-import type { Position, RecentsOption, Sections, SortOrder } from "@/types/app";
 import { RecentsDropdown } from "./ui/recent-dropdown";
 import { Input } from "../ui/input";
 import LeftSidebarHeader from "./ui/left-sidebar-header";
@@ -13,9 +12,9 @@ import {
     sortByOrder,
     sortPinnedFirst,
 } from "@/utils/app-left-sidebar";
-import { libItemMocks } from "@/mocks/left-side-bar";
 import ToolTip from "../ui/tool-tip";
 import LibraryItem from "./ui/library-item";
+import type { Position, RecentsOption, Sections, SortOrder } from "@/types";
 
 const tooltips = [
     { id: "search-lib-tooltip", content: "Search in Library", position: "top" },
@@ -41,7 +40,7 @@ export default function AppLeftSidebar() {
 
     // items ordering - hook useMemo avoid re-calculating on each render
     const orderedItems = useMemo(() => {
-        return sortPinnedFirst(libItemMocks);
+        return sortPinnedFirst([]);
     }, []);
 
     // handle section change effect on items
@@ -69,7 +68,9 @@ export default function AppLeftSidebar() {
         <aside
             className={cn(
                 "bg-surface flex flex-col transition-all duration-300",
-                collapsed ? "px-0 w-[72px]" : "px-3 lg:w-[210px] xl:w-[260px]",
+                collapsed
+                    ? "px-0 w-[72px]"
+                    : "px-3 lg:w-[210px] xl:w-[260px] 2xl:w-[260px]",
             )}
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}

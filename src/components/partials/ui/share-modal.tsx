@@ -1,15 +1,15 @@
-import type { TrackPost } from "@/types/notification";
 import TrackContent from "./track-content";
 import { formatRelativeTime } from "@/utils/time-parser";
 import Badge from "./badge";
 import { Input } from "@/components/ui/input";
 import { Copy } from "lucide-react";
+import type { Album, Track } from "@/types";
 
 interface ShareModalProps {
-    trackPost: TrackPost;
+    item: Track | Album;
 }
 
-export default function ShareModal({ trackPost }: ShareModalProps) {
+export default function ShareModal({ item }: ShareModalProps) {
     const handleCopy = (url: string) => {
         navigator.clipboard.writeText(url);
     };
@@ -19,31 +19,40 @@ export default function ShareModal({ trackPost }: ShareModalProps) {
             <div className="space-y-2">
                 <div className="flex items-center justify-between">
                     <span className="text-sm text-foreground-muted">
-                        {formatRelativeTime(trackPost.createdAt)}
+                        {formatRelativeTime(item.createdAt)}
                     </span>
 
-                    <div className="flex items-center gap-1">
-                        {trackPost.tags &&
-                            trackPost.tags.map((tag) => (
-                                <Badge
-                                    key={tag}
-                                    title={`#${tag}`}
-                                    className="bg-surface-muted-hover hover:opacity-80"
-                                />
-                            ))}
-                    </div>
+                    {item.type === "TRACK" ? (
+                        <div className="flex items-center gap-1">
+                            {item.tags &&
+                                item.tags.map((tag) => (
+                                    <Badge
+                                        key={tag}
+                                        title={`#${tag}`}
+                                        className="bg-surface-muted-hover hover:opacity-80"
+                                    />
+                                ))}
+                        </div>
+                    ) : (
+                        <div className="flex items-center gap-1">
+                            <Badge
+                                title={item.artist.username}
+                                className="bg-surface-muted-hover hover:opacity-80"
+                            />
+                        </div>
+                    )}
                 </div>
 
                 <div className="flex items-center gap-5">
                     <img
-                        src={trackPost.trackCover}
+                        src={item.coverUrl}
                         alt="Track Cover"
                         className="w-16 h-16 rounded-lg"
                     />
 
                     <div className="flex flex-col flex-1 items-start gap-12">
                         <div className="w-full flex items-center justify-between">
-                            <TrackContent post={trackPost} isInModal={true} />
+                            <TrackContent item={item} isInModal={true} />
                         </div>
                     </div>
                 </div>
@@ -52,7 +61,7 @@ export default function ShareModal({ trackPost }: ShareModalProps) {
             {/* Bạn có thể thêm copy link, social buttons ở đây */}
             <div className="flex items-center gap-2">
                 <Input
-                    value={`https://sssound.com/track/${trackPost.id}`}
+                    value={`https://sssound.com/track/${item.id}`}
                     className="border-0 pointer-events-none"
                 />
 
@@ -61,9 +70,7 @@ export default function ShareModal({ trackPost }: ShareModalProps) {
                         size={20}
                         className="text-foreground-muted cursor-pointer hover:text-foreground"
                         onClick={() =>
-                            handleCopy(
-                                `https://sssound.com/track/${trackPost.id}`,
-                            )
+                            handleCopy(`https://sssound.com/track/${item.id}`)
                         }
                     />
                 </div>

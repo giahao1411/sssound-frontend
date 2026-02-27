@@ -1,7 +1,7 @@
 import { RECENT_OPTIONS } from "@/constants/app";
 import { useToggleOutside } from "@/hooks/use-toggle-outside";
 import { cn } from "@/lib/cn";
-import type { SortOrder, RecentsOption } from "@/types/app";
+import type { RecentsOption, SortOrder } from "@/types";
 import { ArrowDown } from "lucide-react";
 import { useState } from "react";
 import { TfiMenuAlt } from "react-icons/tfi";
@@ -41,7 +41,7 @@ export function RecentsDropdown({
                 onClick={() => setOpen((v) => !v)}
                 className={cn(
                     "flex items-center gap-2 text-foreground-muted cursor-pointer select-none",
-                    "hover:text-foreground hover:scale-105"
+                    "hover:text-foreground hover:scale-105",
                 )}
             >
                 {!isSearch ? (

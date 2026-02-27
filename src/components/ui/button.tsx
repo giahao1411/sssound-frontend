@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/cn";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    variant?: "primary" | "ghost" | "media" | "section";
+    variant?: "primary" | "ghost" | "media" | "section" | "custom";
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -20,6 +20,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                         "bg-foreground text-background hover:opacity-90",
                     variant === "section" &&
                         "bg-surface-muted text-foreground hover:bg-surface-muted-hover",
+                    variant === "custom" &&
+                        "bg-success text-white hover:opacity-90",
                     className,
                 )}
                 {...props}

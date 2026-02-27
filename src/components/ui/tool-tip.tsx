@@ -1,4 +1,4 @@
-import type { Position } from "@/types/app";
+import type { Position } from "@/types";
 import { Tooltip } from "react-tooltip";
 
 interface ToolTipProps {
@@ -19,8 +19,6 @@ export default function ToolTip({ anchorId, content, position }: ToolTipProps) {
                 bg-surface
                 text-xs
                 text-foreground
-                border
-                border-border
                 px-2 py-1
                 leading-none
                 shadow-sm

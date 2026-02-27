@@ -1,4 +1,4 @@
-import type { RecentsOption, Sections } from "@/types/app";
+import type { RecentsOption, Sections } from "@/types/core/app";
 
 export const SECTIONS: Sections[] = [
     "Playlists",
@@ -56,4 +56,29 @@ export const COLOR_PALETTES = [
     ["bg-[#083344]", "bg-[#155E75]", "bg-[#06B6D4]", "bg-[#041E2A]"], // Cyan Night
     ["bg-[#500724]", "bg-[#881337]", "bg-[#FB7185]", "bg-[#2A0313]"], // Rose Dark
     ["bg-[#1C1917]", "bg-[#292524]", "bg-[#78716C]", "bg-[#0C0A09]"], // Graphite
+];
+
+export const GENRES = [
+    { type: "Pop", color: "bg-[#60A5FA]" }, // blue
+    { type: "Rap", color: "bg-[#F87171]" }, // red
+    { type: "Hip-Hop", color: "bg-[#FB923C]" }, // orange
+    { type: "Indie", color: "bg-[#A78BFA]" }, // violet
+    { type: "Rock", color: "bg-[#FACC15]" }, // yellow
+    { type: "Jazz", color: "bg-[#34D399]" }, // emerald
+    { type: "Classical", color: "bg-[#38BDF8]" }, // sky
+    { type: "Country", color: "bg-[#FBBF24]" }, // amber
+    { type: "Electronic", color: "bg-[#22D3EE]" }, // cyan
+    { type: "R&B", color: "bg-[#F472B6]" }, // pink
+    { type: "Reggae", color: "bg-[#4ADE80]" }, // green
+    { type: "Blues", color: "bg-[#818CF8]" }, // indigo
+    { type: "Metal", color: "bg-[#FB7185]" }, // rose
+    { type: "Folk", color: "bg-[#A3E635]" }, // lime
+    { type: "Punk", color: "bg-[#F97316]" }, // orange strong
+    { type: "Disco", color: "bg-[#E879F9]" }, // fuchsia
+    { type: "Funk", color: "bg-[#2DD4BF]" }, // teal
+    { type: "Gospel", color: "bg-[#C084FC]" }, // purple
+    { type: "Ska", color: "bg-[#FCD34D]" }, // yellow soft
+    { type: "Soul", color: "bg-[#FB7185]" }, // rose
+    { type: "Techno", color: "bg-[#22C55E]" }, // green vivid
+    { type: "Trance", color: "bg-[#38BDF8]" }, // sky bright
 ];

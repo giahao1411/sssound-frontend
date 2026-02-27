@@ -24,6 +24,8 @@ export type RecentsOption =
 
 export type SortOrder = "asc" | "desc";
 
+export type Direction = "left" | "right";
+
 export type Position =
     | "top"
     | "top-start"
@@ -37,5 +39,3 @@ export type Position =
     | "right"
     | "right-start"
     | "right-end";
-
-export type PostType = "track" | "album" | "playlist" | "repost";

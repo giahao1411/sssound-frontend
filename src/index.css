@@ -162,4 +162,3 @@ input[type="range"]:focus-visible::-moz-range-thumb {
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
-

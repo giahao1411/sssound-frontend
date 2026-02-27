@@ -1,55 +1,49 @@
-import { Button } from "@/components/ui/button";
-import type { TrackPost } from "@/types/notification";
+import PlayButton from "@/components/ui/play-button";
+import { usePlayTrack } from "@/hooks/use-play-track";
+import type { Album, Track } from "@/types";
+import { mapToAlbum } from "@/utils/map-to-album";
+import { mapToTrack } from "@/utils/map-to-track";
 import { formatDuration } from "@/utils/time-parser";
-import { FaPause, FaPlay } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 interface TrackContentProps {
-    post: TrackPost;
-    playingTrack?: string | null;
+    item: Track | Album;
     isInModal?: boolean;
-    setPlayingTrack?: (trackId: string | null) => void;
 }
 
 export default function TrackContent({
-    post,
-    playingTrack,
+    item,
     isInModal = false,
-    setPlayingTrack,
 }: TrackContentProps) {
+    const itemContent =
+        item.type === "TRACK" ? mapToTrack(item) : mapToAlbum(item).tracks[0];
+
+    const { isPlaying, handlePlay } = usePlayTrack(itemContent);
+
     return (
         <div className="w-full flex items-center justify-between">
             {/* track info, play button */}
             <div className="flex items-center gap-4">
-                <Button
-                    variant="media"
-                    disabled={isInModal}
-                    className="p-0 w-11 h-11 rounded-full"
-                    onClick={() =>
-                        setPlayingTrack &&
-                        setPlayingTrack(
-                            playingTrack === post.id ? null : post.id,
-                        )
-                    }
-                >
-                    {playingTrack && <FaPlay className="pl-0.5" size={18} />}
-
-                    {playingTrack === post.id ? (
-                        <FaPause className="pl-0.5" size={18} />
-                    ) : (
-                        <FaPlay className="pl-0.5" size={18} />
-                    )}
-                </Button>
+                <PlayButton
+                    playing={isPlaying}
+                    onToggle={handlePlay}
+                    className="w-10 h-10"
+                    isInModal={isInModal}
+                />
 
                 <div className="flex flex-col">
-                    <span className="text-sm text-foreground-muted">
-                        {post.artist}
-                    </span>
-                    <span className="font-bold">{post.title}</span>
+                    <Link
+                        className="text-sm text-foreground-muted hover:underline"
+                        to={`/profile/${itemContent.artist.id}`}
+                    >
+                        {itemContent.artist.username}
+                    </Link>
+                    <span className="font-bold">{itemContent.title}</span>
                 </div>
             </div>
 
             <span className="text-sm text-foreground-muted">
-                {formatDuration(post.duration)}
+                {formatDuration(itemContent.duration)}
             </span>
         </div>
     );

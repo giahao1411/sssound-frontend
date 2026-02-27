@@ -13,7 +13,8 @@ export default function RightSidebar() {
         <aside
             className={cn(
                 "bg-surface flex flex-col transition-all duration-300",
-                open ? "lg:w-[275px] xl:w-[350px]" : "w-[56px]",
+                open ? "lg:w-[275px] xl:w-[300px] 2xl:w-[350px]" : "w-[56px]",
+                !open && "hover:bg-surface-muted justify-center cursor-pointer",
             )}
             onClick={!open ? toggle : undefined}
             onMouseEnter={() => setIsToggle(true)}
@@ -23,7 +24,6 @@ export default function RightSidebar() {
             {!open && (
                 <Button
                     variant="ghost"
-                    className="flex items-center justify-center cursor-pointer hover:bg-surface-muted transition"
                     onClick={(e) => {
                         e.stopPropagation();
                         toggle();
