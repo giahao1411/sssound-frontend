@@ -98,64 +98,80 @@ export default function Notification() {
 
                 {/* posts body */}
                 <div className="grid grid-cols-1 2xl:grid-cols-2 gap-10 py-6">
-                    {posts.map((post) => (
-                        <div className="flex flex-col gap-4">
-                            {/* post header */}
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-3">
-                                    <img
-                                        src="./avatar.jpg"
-                                        alt="User Avatar"
-                                        className="w-7 h-7 rounded-full"
-                                    />
+                    {posts.map((post) => {
+                        const isTrack =
+                            post.type === "TRACK" ||
+                            post.type === "REPOST_TRACK";
 
-                                    <span className="text-sm">
-                                        <Link
-                                            className="hover:underline"
-                                            to={`/profile/${post.artist.id}`}
-                                        >
-                                            <strong>{post.artist.username}</strong>
-                                        </Link>{" "}
-                                        posted a {post.type}{" "}
-                                        {formatRelativeTime(post.createdAt)}
-                                    </span>
-                                </div>
+                        return (
+                            <div className="flex flex-col gap-4">
+                                {/* post header */}
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-3">
+                                        <img
+                                            src="./avatar.jpg"
+                                            alt="User Avatar"
+                                            className="w-7 h-7 rounded-full"
+                                        />
 
-                                {/* tags */}
-                                {post.type === "TRACK" ||
-                                    (post.type === "REPOST_TRACK" && (
-                                        <div className="flex items-center gap-1">
-                                            {post.track.tags &&
-                                                post.track.tags.map((tag) => (
-                                                    <Badge
-                                                        key={tag}
-                                                        title={`#${tag}`}
-                                                    />
-                                                ))}
-                                        </div>
-                                    ))}
-                            </div>
-
-                            {/* post cover and content */}
-                            <div className="flex items-center gap-5">
-                                <img
-                                    src={post.coverImage}
-                                    alt="Track Cover"
-                                    className="w-32 h-32 rounded-lg"
-                                />
-
-                                <div className="flex flex-col flex-1 items-start gap-12">
-                                    <div className="w-full flex items-center justify-between">
-                                        {/* track info, play button */}
-                                        <TrackContent item={post} />
+                                        <span className="text-sm">
+                                            <Link
+                                                className="hover:underline"
+                                                to={`/profile/${post.user.id}`}
+                                            >
+                                                <strong>
+                                                    {post.user.username}
+                                                </strong>
+                                            </Link>{" "}
+                                            posted a {post.type}{" "}
+                                            {formatRelativeTime(post.timestamp)}
+                                        </span>
                                     </div>
 
-                                    {/* action buttons */}
-                                    <ActionButton post={post} />
+                                    {/* tags */}
+                                    {post.type === "TRACK" ||
+                                        (post.type === "REPOST_TRACK" && (
+                                            <div className="flex items-center gap-1">
+                                                {post.track.tags &&
+                                                    post.track.tags.map(
+                                                        (tag) => (
+                                                            <Badge
+                                                                key={tag}
+                                                                title={`#${tag}`}
+                                                            />
+                                                        ),
+                                                    )}
+                                            </div>
+                                        ))}
+                                </div>
+
+                                {/* post cover and content */}
+                                <div className="flex items-center gap-5">
+                                    <img
+                                        src={post.coverUrl}
+                                        alt="Track Cover"
+                                        className="w-32 h-32 rounded-lg"
+                                    />
+
+                                    <div className="flex flex-col flex-1 items-start gap-12">
+                                        <div className="w-full flex items-center justify-between">
+                                            {/* track info, play button */}
+                                            <TrackContent
+                                                item={
+                                                    isTrack
+                                                        ? post.track
+                                                        : post.album
+                                                }
+                                            />
+                                        </div>
+
+                                        {/* action buttons */}
+                                        <ActionButton post={post} />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </div>
