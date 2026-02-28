@@ -1,7 +1,7 @@
 import { Search } from "lucide-react";
 import { useLeftSidebarStore } from "@/store/left-sidebar-store";
 import { cn } from "@/lib/cn";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useToggleOutside } from "@/hooks/use-toggle-outside";
 import { RecentsDropdown } from "./ui/recent-dropdown";
 import { Input } from "../ui/input";
@@ -15,6 +15,8 @@ import {
 import ToolTip from "../ui/tool-tip";
 import LibraryItem from "./ui/library-item";
 import type { Position, RecentsOption, Sections, SortOrder } from "@/types";
+import { useSharedDataStore } from "@/store/shared-data-store";
+import { mockLibraryItems } from "@/mocks/library-item";
 
 const tooltips = [
     { id: "search-lib-tooltip", content: "Search in Library", position: "top" },
@@ -22,6 +24,8 @@ const tooltips = [
 
 export default function AppLeftSidebar() {
     const { collapsed, toggle } = useLeftSidebarStore();
+    const { libraryItems, setLibraryItems } = useSharedDataStore();
+
     const [isHover, setIsHover] = useState(false);
     const [isSearch, setIsSearch] = useState(false);
 
@@ -40,8 +44,8 @@ export default function AppLeftSidebar() {
 
     // items ordering - hook useMemo avoid re-calculating on each render
     const orderedItems = useMemo(() => {
-        return sortPinnedFirst([]);
-    }, []);
+        return sortPinnedFirst(libraryItems);
+    }, [libraryItems]);
 
     // handle section change effect on items
     const sectionItems = useMemo(() => {
@@ -63,6 +67,11 @@ export default function AppLeftSidebar() {
         if (!isSearch) return merged;
         return filterBySearch(merged, searchInput);
     }, [optionItems, isSearch, searchInput]);
+
+    // set mock library items on component mount, replace with real data when available
+    useEffect(() => {
+        setLibraryItems(mockLibraryItems);
+    }, [setLibraryItems]);
 
     return (
         <aside
