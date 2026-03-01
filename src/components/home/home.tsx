@@ -1,26 +1,39 @@
-import PlaylistCardRec from "./ui/cards/playlist-card-rec";
-import CardSqr from "./ui/cards/card-sqr";
-// import {
-//     recentlyPlayedMocks,
-//     recommendMocks,
-//     suggestionMocks,
-// } from "@/mocks/playlist";
-import ScrollingRow from "./ui/scrolling-row";
-import NewTrackCard from "./ui/cards/new-track-card";
-import CardWithCover from "./ui/cards/card-with-cover";
+import PlaylistCardRec from "../partials/ui/cards/playlist-card-rec";
+import CardSqr from "../partials/ui/cards/card-sqr";
+
+import ScrollingRow from "../partials/ui/scrolling-row";
+import NewTrackCard from "../partials/ui/cards/new-track-card";
+import CardWithCover from "../partials/ui/cards/card-with-cover";
 import { useSharedDataStore } from "@/store/shared-data-store";
+import { useEffect } from "react";
+import {
+    mockSuggestions,
+    mockRecommendTracks,
+    mockRecentlyPlayed,
+} from "@/mocks";
 
 const headerClassName = "text-xl font-bold";
 
 export default function Home() {
     // used shared data store
-    const { suggestions, recentlyPlayed, recommendTracks } = useSharedDataStore(
-        (state) => state,
-    );
+    const {
+        suggestions,
+        recentlyPlayed,
+        recommendTracks,
+        setSuggestions,
+        setRecentlyPlayed,
+        setRecommendTracks,
+    } = useSharedDataStore();
 
     const filteredRecentPlayed = recentlyPlayed
         .sort((a, b) => b.lastPlayedAt - a.lastPlayedAt)
         .slice(0, 8);
+
+    useEffect(() => {
+        setSuggestions(mockSuggestions);
+        setRecommendTracks(mockRecommendTracks);
+        setRecentlyPlayed(mockRecentlyPlayed);
+    }, [setSuggestions, setRecommendTracks, setRecentlyPlayed]);
 
     return (
         <div className="flex flex-col gap-10 pb-6">

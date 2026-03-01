@@ -16,7 +16,7 @@ import ToolTip from "../ui/tool-tip";
 import LibraryItem from "./ui/library-item";
 import type { Position, RecentsOption, Sections, SortOrder } from "@/types";
 import { useSharedDataStore } from "@/store/shared-data-store";
-import { mockLibraryItems } from "@/mocks/library-item";
+import { mockLibraryItems } from "@/mocks";
 
 const tooltips = [
     { id: "search-lib-tooltip", content: "Search in Library", position: "top" },

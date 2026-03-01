@@ -1,11 +1,11 @@
 import type { LibraryItem, Sections, SortOrder } from "@/types";
 
 const typeMap: Record<string, Sections> = {
-    Album: "Albums",
-    Playlist: "Playlists",
-    Artist: "Artists",
-    EP: "EPs",
-    Genre: "Genres",
+    Album: "Album",
+    Playlist: "Playlist",
+    Artist: "Artist",
+    EP: "EP",
+    Genre: "Genre",
 };
 
 // sort pinned items first, then sort by title

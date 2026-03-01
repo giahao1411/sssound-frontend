@@ -1,4 +1,5 @@
 import type { JSX } from "react";
+import type { MediaType } from "./media";
 
 export type AppRoute = {
     path: string;
@@ -8,13 +9,7 @@ export type AppRoute = {
 
 export type ToastType = "success" | "error" | "info";
 
-export type Sections =
-    | "Default"
-    | "Playlists"
-    | "Albums"
-    | "EPs"
-    | "Artists"
-    | "Genres";
+export type Sections = "Default" | MediaType;
 
 export type RecentsOption =
     | "Recently Played"

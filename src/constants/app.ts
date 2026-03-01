@@ -1,11 +1,11 @@
 import type { RecentsOption, Sections } from "@/types/core/app";
 
 export const SECTIONS: Sections[] = [
-    "Playlists",
-    "Albums",
-    "EPs",
-    "Artists",
-    "Genres",
+    "Playlist",
+    "Album",
+    "EP",
+    "Artist",
+    "Genre",
 ];
 
 export const RECENT_OPTIONS: RecentsOption[] = [

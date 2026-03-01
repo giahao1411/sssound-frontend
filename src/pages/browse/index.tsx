@@ -1,4 +1,4 @@
-import Browse from "@/components/partials/browse";
+import Browse from "@/components/browse/browse";
 
 export default function BrowsePage() {
     return <Browse />;

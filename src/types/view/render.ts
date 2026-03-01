@@ -1,4 +1,4 @@
-import type { SuggestionType } from "../core/media";
+import type { MediaType } from "../core/media";
 import type { User } from "../main/user";
 
 export interface PlayingTrack {
@@ -12,7 +12,7 @@ export interface PlayingTrack {
 export interface Suggestion {
     id: string;
     title: string;
-    type: SuggestionType;
+    type: MediaType;
 
     artist: User;
 
@@ -33,7 +33,7 @@ export interface LibraryItem {
     id: string;
     coverUrl: string;
     title: string;
-    type: SuggestionType;
+    type: MediaType;
     artist: string;
     isPinned: boolean;
 }
