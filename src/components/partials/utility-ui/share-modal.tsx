@@ -22,7 +22,7 @@ export default function ShareModal({ item }: ShareModalProps) {
                         {formatRelativeTime(item.createdAt)}
                     </span>
 
-                    {item.type === "TRACK" ? (
+                    {item.type === "Track" ? (
                         <div className="flex items-center gap-1">
                             {item.tags &&
                                 item.tags.map((tag) => (

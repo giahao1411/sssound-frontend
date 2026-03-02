@@ -125,7 +125,7 @@ export default function ActionButton({ post }: ActionButtonProps) {
                     open={isOpenModal}
                     onOpenChange={setIsOpenModal}
                     title={
-                        selectedPostModal.type === "TRACK"
+                        selectedPostModal.type === "Track"
                             ? "Share Track"
                             : "Share Album"
                     }
