@@ -41,4 +41,14 @@ export const mockArtists: User[] = [
         createdAt: "2015-01-01T00:00:00Z",
         updatedAt: "2024-06-01T00:00:00Z",
     },
+    {
+        id: "u5",
+        username: "Hao Tran",
+        email: "hao.tran@example.com",
+        avatarUrl: "https://picsum.photos/100?random=25",
+        role: "User",
+        verified: false,
+        createdAt: "2020-01-01T00:00:00Z",
+        updatedAt: "2024-06-01T00:00:00Z",
+    },
 ];

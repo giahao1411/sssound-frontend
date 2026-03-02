@@ -1,9 +1,9 @@
-import PlaylistCardRec from "../partials/ui/cards/playlist-card-rec";
-import CardSqr from "../partials/ui/cards/card-sqr";
+import PlaylistCardRec from "../partials/cards/playlist-card-rec";
+import CardSqr from "../partials/cards/card-sqr";
 
-import ScrollingRow from "../partials/ui/scrolling-row";
-import NewTrackCard from "../partials/ui/cards/new-track-card";
-import CardWithCover from "../partials/ui/cards/card-with-cover";
+import ScrollingRow from "../partials/utility-ui/scrolling-row";
+import NewTrackCard from "../partials/cards/new-track-card";
+import CardWithCover from "../partials/cards/card-with-cover";
 import { useSharedDataStore } from "@/store/shared-data-store";
 import { useEffect } from "react";
 import {
