@@ -4,7 +4,7 @@ import { cn } from "@/lib/cn";
 export default function Browse() {
     return (
         <div className="flex flex-col">
-            <h1 className="text-xl font-bold">Browse All</h1>
+            <h1 className="font-mplus text-xl font-bold">Browse All</h1>
 
             <div className="grid grid-cols-3 xl:grid-cols-4 gap-4 py-6">
                 {CATEGORIES.map((category, index) => {
@@ -16,7 +16,7 @@ export default function Browse() {
                         <div
                             key={category}
                             className={cn(
-                                "rounded-xl p-4 h-36 cursor-pointer",
+                                "font-josefin rounded-xl p-4 h-36 cursor-pointer",
                                 "hover:scale-102 hover:transition-all",
                                 bg,
                             )}

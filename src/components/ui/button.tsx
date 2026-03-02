@@ -11,7 +11,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             <button
                 ref={ref}
                 className={cn(
-                    "inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-small transition cursor-pointer focus:outline-none",
+                    "inline-flex items-center justify-center rounded-md px-4 py-2 transition cursor-pointer focus:outline-none",
+                    "text-sm font-small font-osans",
                     variant === "primary" &&
                         "bg-primary text-primary-foreground hover:opacity-90",
                     variant === "ghost" &&

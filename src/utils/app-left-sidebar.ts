@@ -1,15 +1,15 @@
-import type { Sections, SortOrder } from "@/types";
+import type { LibraryItem, Sections, SortOrder } from "@/types";
 
 const typeMap: Record<string, Sections> = {
-    Album: "Albums",
-    Playlist: "Playlists",
-    Artist: "Artists",
-    EP: "EPs",
-    Genre: "Genres",
+    Album: "Album",
+    Playlist: "Playlist",
+    Artist: "Artist",
+    EP: "EP",
+    Genre: "Genre",
 };
 
 // sort pinned items first, then sort by title
-export function sortPinnedFirst(items: any[]) {
+export function sortPinnedFirst(items: LibraryItem[]) {
     const pinned = items
         .filter((i) => i.isPinned)
         .sort((a, b) => a.title.localeCompare(b.title));
@@ -22,7 +22,7 @@ export function sortPinnedFirst(items: any[]) {
 }
 
 export function sortByOrder(
-    groups: { pinned: any[]; normal: any[] },
+    groups: { pinned: LibraryItem[]; normal: LibraryItem[] },
     order: SortOrder,
 ) {
     if (order === "asc") {
@@ -36,14 +36,14 @@ export function sortByOrder(
 }
 
 // filter items by section
-export function filterBySection(items: any[], section: Sections) {
+export function filterBySection(items: LibraryItem[], section: Sections) {
     if (section === "Default") return items;
 
     return items.filter((item) => typeMap[item.type] === section);
 }
 
 // filter items by search keyword
-export function filterBySearch(items: any[], search: string) {
+export function filterBySearch(items: LibraryItem[], search: string) {
     const keyword = search.toLowerCase();
 
     return items.filter(

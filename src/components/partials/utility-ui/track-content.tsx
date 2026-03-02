@@ -15,10 +15,12 @@ export default function TrackContent({
     item,
     isInModal = false,
 }: TrackContentProps) {
-    const itemContent =
-        item.type === "TRACK" ? mapToTrack(item) : mapToAlbum(item).tracks[0];
+    // check the item type to determine if it's a track or album
+    // then map it to a track for consistent handling
+    const media =
+        item.type === "Track" ? mapToTrack(item) : mapToAlbum(item).tracks[0];
 
-    const { isPlaying, handlePlay } = usePlayTrack(itemContent);
+    const { isPlaying, handlePlay } = usePlayTrack(media);
 
     return (
         <div className="w-full flex items-center justify-between">
@@ -34,16 +36,16 @@ export default function TrackContent({
                 <div className="flex flex-col">
                     <Link
                         className="text-sm text-foreground-muted hover:underline"
-                        to={`/profile/${itemContent.artist.id}`}
+                        to={`/profile/${media.artist.id}`}
                     >
-                        {itemContent.artist.username}
+                        {media.artist.username}
                     </Link>
-                    <span className="font-bold">{itemContent.title}</span>
+                    <span className="font-bold">{media.title}</span>
                 </div>
             </div>
 
             <span className="text-sm text-foreground-muted">
-                {formatDuration(itemContent.duration)}
+                {formatDuration(media.duration)}
             </span>
         </div>
     );

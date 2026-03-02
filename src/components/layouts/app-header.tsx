@@ -1,7 +1,7 @@
-import { Search, Settings } from "lucide-react";
+import { Disc3, Search, Settings } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AiFillAppstore, AiOutlineAppstore } from "react-icons/ai";
 import { GoHome, GoHomeFill } from "react-icons/go";
 import { BsBell, BsBellFill } from "react-icons/bs";
@@ -22,14 +22,10 @@ export default function AppHeader() {
     return (
         <header className="sticky top-0 z-15 w-full bg-background/80 backdrop-blur">
             <div className="flex items-center justify-evenly h-15.5 max-w-8xl px-7">
-                <div className="flex bg-surface rounded-full p-1.5 cursor-pointer">
-                    <img
-                        id="user-tooltip"
-                        src="/avatar.jpg"
-                        alt="user-avatar"
-                        className="w-8 h-8 object-cover rounded-full"
-                    />
-                </div>
+                <Link to="/" className="flex items-center gap-2 cursor-pointer">
+                    <Disc3 className="mb-1.5" />
+                    <h2 className="font-josefin font-bold text-2xl">SSSOUND</h2>
+                </Link>
 
                 <div className="flex flex-1 w-full justify-center items-center gap-2">
                     <div className="bg-surface rounded-full  hover:text-foreground hover:scale-105">
@@ -129,7 +125,20 @@ export default function AppHeader() {
                     <Settings
                         id="setting-tooltip"
                         size={19}
-                        className="text-foreground-muted hover:transition-all hover:scale-105 hover:text-foreground"
+                        className={cn(
+                            "text-foreground-muted hover:transition-all hover:scale-105 hover:text-foreground",
+                            "cursor-pointer",
+                        )}
+                    />
+
+                    <img
+                        id="user-tooltip"
+                        src="/avatar.jpg"
+                        alt="user-avatar"
+                        className={cn(
+                            "w-8 h-8 object-cover rounded-full",
+                            "cursor-pointer",
+                        )}
                     />
                 </div>
             </div>

@@ -4,25 +4,6 @@ import type { Track } from "./track";
 import type { User } from "./user";
 
 export type Notification =
-    // ===== NEW RELEASE =====
-    | {
-          id: string;
-          type: "NEW_TRACK";
-          sender: User;
-          receiver: User;
-          track: Pick<Track, MediaInfo>;
-          isRead: boolean;
-          timestamp: number;
-      }
-    | {
-          id: string;
-          type: "NEW_ALBUM" | "NEW_EP";
-          sender: User;
-          receiver: User;
-          album: Pick<Album, MediaInfo>;
-          isRead: boolean;
-          timestamp: number;
-      }
     // ===== LIKE =====
     | {
           id: string;
@@ -36,25 +17,6 @@ export type Notification =
     | {
           id: string;
           type: "LIKE_ALBUM" | "LIKE_EP";
-          sender: User;
-          receiver: User;
-          album: Pick<Album, MediaInfo>;
-          isRead: boolean;
-          timestamp: number;
-      }
-    // ===== REPOST =====
-    | {
-          id: string;
-          type: "REPOST_TRACK";
-          sender: User;
-          receiver: User;
-          track: Pick<Track, MediaInfo>;
-          isRead: boolean;
-          timestamp: number;
-      }
-    | {
-          id: string;
-          type: "REPOST_ALBUM" | "REPOST_EP";
           sender: User;
           receiver: User;
           album: Pick<Album, MediaInfo>;

@@ -46,7 +46,7 @@ export function RecentsDropdown({
             >
                 {!isSearch ? (
                     <>
-                        <span className="text-xs">{selectedOption}</span>
+                        <span className="text-xs font-osans">{selectedOption}</span>
                         <TfiMenuAlt size={18} />
                     </>
                 ) : (
@@ -66,7 +66,9 @@ export function RecentsDropdown({
                 )}
             >
                 <ul className="py-1 text-xs">
-                    <li className="px-3 py-2 pointer-events-none">Sort by</li>
+                    <li className="font-osans px-3 py-2 pointer-events-none">
+                        Sort by
+                    </li>
 
                     {RECENT_OPTIONS.map((item) => (
                         <li
@@ -81,7 +83,7 @@ export function RecentsDropdown({
                             }}
                         >
                             <div className="flex items-center justify-between">
-                                <span className="">{item}</span>
+                                <span className="font-osans">{item}</span>
 
                                 {selectedOption === item && (
                                     <ArrowDown

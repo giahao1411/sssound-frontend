@@ -3,14 +3,12 @@ import { cn } from "@/lib/cn";
 import { ChevronLeft, MoreHorizontal } from "lucide-react";
 
 interface RightSidebarHeaderProps {
-    title: string;
     open: boolean;
     isHover: boolean;
     toggle: () => void;
 }
 
 export default function RightSidebarHeader({
-    title,
     open,
     isHover,
     toggle,
@@ -42,11 +40,11 @@ export default function RightSidebarHeader({
 
                 <span
                     className={cn(
-                        "font-semibold transition-transform duration-200 ease-out",
+                        "font-mplus font-semibold transition-transform duration-200 ease-out",
                         isHover ? "translate-x-0" : "-translate-x-5",
                     )}
                 >
-                    {title}
+                    Now Playing
                 </span>
             </div>
 

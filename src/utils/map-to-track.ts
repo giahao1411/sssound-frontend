@@ -12,16 +12,18 @@ export const mapToTrack = (item: any): Track => {
         tags: item.tags,
         releaseDate: item.releaseDate,
         isExplicit: item.isExplicit,
+
         artist: {
             id: item.artist.id,
             username: item.artist.username,
             avatarUrl: item.artist.avatarUrl,
-            email: "",
+            email: item.artist.email,
             role: item.artist.role as UserType,
-            verified: false,
-            createdAt: "",
-            updatedAt: "",
+            verified: item.artist.verified,
+            createdAt: item.artist.createdAt,
+            updatedAt: item.artist.updatedAt,
         },
+
         album: item.album
             ? {
                   id: item.album.id,
@@ -29,10 +31,12 @@ export const mapToTrack = (item: any): Track => {
                   coverUrl: item.album.coverUrl,
               }
             : undefined,
+
         createdAt: item.createdAt,
-        liked: false,
-        reposted: false,
-        likesCount: 0,
-        repostsCount: 0,
+
+        liked: item.liked,
+        reposted: item.reposted,
+        likesCount: item.likesCount,
+        repostsCount: item.repostsCount,
     };
 };

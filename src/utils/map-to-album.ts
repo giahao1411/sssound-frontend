@@ -13,11 +13,11 @@ export const mapToAlbum = (item: any) => {
             id: item.artist.id,
             username: item.artist.username,
             avatarUrl: item.artist.avatarUrl,
-            email: "",
+            email: item.artist.email,
             role: item.artist.role,
-            verified: false,
-            createdAt: "",
-            updatedAt: "",
+            verified: item.artist.verified,
+            createdAt: item.artist.createdAt,
+            updatedAt: item.artist.updatedAt,
         },
 
         tracks: item.tracks
@@ -26,5 +26,10 @@ export const mapToAlbum = (item: any) => {
 
         releaseDate: item.releaseDate,
         createdAt: item.createdAt,
+
+        liked: item.liked,
+        reposted: item.reposted,
+        likesCount: item.likesCount,
+        repostsCount: item.repostsCount,
     };
 };

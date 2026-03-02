@@ -1,0 +1,88 @@
+import type { Notification } from "@/types";
+import { mockArtists } from "./artist";
+import { mockTracks } from "./track";
+import { mockAlbums } from "./album";
+
+export const mockNotifications: Notification[] = [
+    {
+        id: "n1",
+        type: "LIKE_TRACK",
+        sender: mockArtists[0],
+        receiver: mockArtists[4],
+        track: mockTracks[0],
+        isRead: false,
+        timestamp: Date.now() - 1000 * 60 * 5,
+    },
+    {
+        id: "n2",
+        type: "LIKE_ALBUM",
+        sender: mockArtists[1],
+        receiver: mockArtists[4],
+        album: mockAlbums[1],
+        isRead: false,
+        timestamp: Date.now() - 1000 * 60 * 60,
+    },
+    {
+        id: "n3",
+        type: "LIKE_EP",
+        sender: mockArtists[3],
+        receiver: mockArtists[4],
+        album: mockAlbums[2],
+        isRead: true,
+        timestamp: Date.now() - 1000 * 60 * 60 * 3,
+    },
+    {
+        id: "n4",
+        type: "LIKE_TRACK",
+        sender: mockArtists[1],
+        receiver: mockArtists[4],
+        track: mockTracks[1],
+        isRead: true,
+        timestamp: Date.now() - 1000 * 60 * 60 * 5,
+    },
+    {
+        id: "n5",
+        type: "LIKE_ALBUM",
+        sender: mockArtists[2],
+        receiver: mockArtists[4],
+        album: mockAlbums[1],
+        isRead: false,
+        timestamp: Date.now() - 1000 * 60 * 60 * 8,
+    },
+    {
+        id: "n6",
+        type: "LIKE_EP",
+        sender: mockArtists[3],
+        receiver: mockArtists[4],
+        album: mockAlbums[2],
+        isRead: true,
+        timestamp: Date.now() - 1000 * 60 * 60 * 12,
+    },
+    {
+        id: "n7",
+        type: "LIKE_TRACK",
+        sender: mockArtists[2],
+        receiver: mockArtists[4],
+        track: mockTracks[2],
+        isRead: false,
+        timestamp: Date.now() - 1000 * 60 * 60 * 24,
+    },
+    {
+        id: "n8",
+        type: "LIKE_ALBUM",
+        sender: mockArtists[1],
+        receiver: mockArtists[4],
+        album: mockAlbums[0],
+        isRead: false,
+        timestamp: Date.now() - 1000 * 60 * 60 * 48,
+    },
+    {
+        id: "n9",
+        type: "LIKE_EP",
+        sender: mockArtists[3],
+        receiver: mockArtists[4],
+        album: mockAlbums[2],
+        isRead: true,
+        timestamp: Date.now() - 1000 * 60 * 60 * 72,
+    },
+];

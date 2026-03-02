@@ -32,7 +32,9 @@ export default function PlaylistCardRec({ playlist }: PlaylistCardRecProps) {
                     className="w-12 h-12 2xl:w-16 2xl:h-16 object-cover rounded-l-sm"
                 />
 
-                <span className="text-xs font-semibold">{playlist.title}</span>
+                <span className="font-osans text-xs font-semibold">
+                    {playlist.title}
+                </span>
             </div>
 
             <div

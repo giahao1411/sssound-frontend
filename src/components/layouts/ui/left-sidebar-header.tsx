@@ -74,7 +74,7 @@ export default function LeftSidebarHeader({
                     {!collapsed && (
                         <span
                             className={cn(
-                                "font-semibold transition-transform duration-200 ease-out",
+                                "font-mplus font-semibold transition-transform duration-200 ease-out",
                                 isHover ? "translate-x-1" : "-translate-x-5",
                             )}
                         >
@@ -114,7 +114,7 @@ export default function LeftSidebarHeader({
                                     key={section}
                                     variant="section"
                                     className={cn(
-                                        "px-3 py-1.5 rounded-2xl whitespace-nowrap",
+                                        "font-josefin px-3 py-1.5 rounded-2xl whitespace-nowrap",
                                         section === selectedSection &&
                                             "bg-foreground text-background hover:bg-foreground-muted",
                                     )}
