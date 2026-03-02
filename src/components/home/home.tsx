@@ -12,7 +12,7 @@ import {
     mockRecentlyPlayed,
 } from "@/mocks";
 
-const headerClassName = "text-xl font-bold";
+const headerClassName = "font-mplus text-xl font-bold";
 
 export default function Home() {
     // used shared data store
@@ -50,6 +50,8 @@ export default function Home() {
                 </div>
             </div>
 
+            {/* ---------- SUGGESTION 1 ---------- */}
+
             <div className="flex flex-col gap-3">
                 <span className={headerClassName}>More of what you like</span>
 
@@ -60,12 +62,16 @@ export default function Home() {
                 </ScrollingRow>
             </div>
 
+            {/* ---------- NEW TRACK / ALBUM NOTIFICATION ---------- */}
+
             {/* banner */}
             <div className="flex flex-col gap-3">
                 <span className={headerClassName}>Notification</span>
 
                 <NewTrackCard />
             </div>
+
+            {/* ---------- SUGGESTION 2 ---------- */}
 
             <div className="flex flex-col gap-3">
                 <span className={headerClassName}>Jump back in</span>
@@ -76,6 +82,8 @@ export default function Home() {
                     ))}
                 </ScrollingRow>
             </div>
+
+            {/* ---------- SUGGESTION 3 ---------- */}
 
             <div className="flex flex-col gap-3">
                 <span className={headerClassName}>
@@ -88,6 +96,8 @@ export default function Home() {
                     ))}
                 </ScrollingRow>
             </div>
+
+            {/* RECOMMENDATIONS WITH IMAGE BACKGROUND COVER */}
 
             <div className="grid grid-cols-1 px-20 xl:px-36 2xl:px-12 2xl:grid-cols-2 gap-6 2xl:gap-x-12 2xl:gap-y-8">
                 {recommendTracks.map((item) => (

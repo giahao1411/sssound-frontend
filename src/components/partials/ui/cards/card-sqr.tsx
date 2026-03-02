@@ -36,11 +36,11 @@ export default function CardSqr({ item }: PlaylistCardSqrProps) {
                     alt={item.title}
                     className={cn(
                         "w-30 h-30 xl:w-38 xl:h-38 object-cover",
-                        item.type === "ARTIST" ? "rounded-full" : "rounded-lg",
+                        item.type === "Artist" ? "rounded-full" : "rounded-lg",
                     )}
                 />
 
-                {item.type !== "ARTIST" && (
+                {item.type !== "Artist" && (
                     <div
                         onClick={(e) => {
                             e.preventDefault();
@@ -67,9 +67,9 @@ export default function CardSqr({ item }: PlaylistCardSqrProps) {
             <div className="flex flex-col min-w-0">
                 <span
                     className={cn(
-                        "text-foreground font-bold",
+                        "font-osans text-foreground font-bold",
                         textClassName,
-                        item.type === "ARTIST" && "text-center",
+                        item.type === "Artist" && "text-center",
                     )}
                 >
                     {item.title}
@@ -77,7 +77,7 @@ export default function CardSqr({ item }: PlaylistCardSqrProps) {
                 {item.featuring && (
                     <span
                         className={cn(
-                            "text-foreground-muted",
+                            "font-osans text-foreground-muted",
                             textClassName,
                             item.featuring.length === 0 && "invisible",
                         )}

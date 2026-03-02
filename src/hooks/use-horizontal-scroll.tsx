@@ -53,12 +53,15 @@ export function useHorizontalScroll({
         const el = scrollRef.current;
         if (!el) return;
 
-        updateScrollState();
+        const raf = requestAnimationFrame(() => {
+            updateScrollState();
+        });
 
         el.addEventListener("scroll", updateScrollState);
         window.addEventListener("resize", updateScrollState);
 
         return () => {
+            cancelAnimationFrame(raf);
             el.removeEventListener("scroll", updateScrollState);
             window.removeEventListener("resize", updateScrollState);
         };

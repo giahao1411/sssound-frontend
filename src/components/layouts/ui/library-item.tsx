@@ -16,7 +16,7 @@ export default function LibraryItem({ item, collapsed }: LibraryItemProps) {
                     alt={item.title}
                     className={cn(
                         "w-full h-full object-cover",
-                        item.type === "ARTIST" ? "rounded-full" : "rounded-sm",
+                        item.type === "Artist" ? "rounded-full" : "rounded-sm",
                     )}
                 />
             </div>
@@ -24,7 +24,7 @@ export default function LibraryItem({ item, collapsed }: LibraryItemProps) {
             {!collapsed && (
                 <div className="flex flex-col min-w-0 gap-1">
                     <div className="truncate text-sm w-full">
-                        <span className="">{item.title}</span>
+                        <span className="font-osans">{item.title}</span>
                     </div>
 
                     <div className="flex items-center gap-1 text-xs text-foreground-muted">
@@ -35,7 +35,7 @@ export default function LibraryItem({ item, collapsed }: LibraryItemProps) {
                             />
                         )}
 
-                        <span className="truncate">
+                        <span className="font-osans truncate">
                             {item.type}
                             {item.artist && ` • ${item.artist}`}
                         </span>

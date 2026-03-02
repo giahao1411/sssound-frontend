@@ -23,6 +23,8 @@ const content = {
     REPOST_EP: "reposted your EP",
 };
 
+const headerClassName = "font-mplus text-xl font-bold";
+
 export default function Notification() {
     const { notifications, posts } = useSharedDataStore((state) => state);
 
@@ -38,7 +40,7 @@ export default function Notification() {
             <div className="flex flex-col gap-4">
                 {/* title and settings icon */}
                 <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold">Notifications</span>
+                    <span className={headerClassName}>Notifications</span>
                     <Settings className="w-5 h-5 cursor-pointer text-foreground-muted hover:text-foreground" />
                 </div>
 
@@ -82,7 +84,7 @@ export default function Notification() {
             <div className="flex flex-col">
                 {/* title and switch */}
                 <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold">
+                    <span className={headerClassName}>
                         Hear the latest posts from the people you're following
                     </span>
 

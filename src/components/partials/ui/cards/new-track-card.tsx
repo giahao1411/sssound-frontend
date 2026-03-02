@@ -15,16 +15,18 @@ export default function NewTrackCard() {
             <div className="flex flex-1 flex-col gap-5">
                 {/* noti type and fixed 'sponsored' */}
                 <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold">Track</span>
-                    <span className="p-1.5 rounded-md bg-surface font-semibold">
+                    <span className="font-osans font-bold">New Track</span>
+                    <span className="p-1.5 rounded-md bg-surface font-osans font-semibold">
                         Sponsored
                     </span>
                 </div>
 
                 {/* title and description */}
                 <div className="flex flex-col gap-3 w-2/3">
-                    <span className="text-3xl font-bold">Cá Hồi</span>
-                    <span className="line-clamp-2 text-sm text-foreground-muted">
+                    <span className="font-mplus text-3xl font-bold">
+                        Cá Hồi
+                    </span>
+                    <span className="font-osans line-clamp-2 text-sm text-foreground-muted">
                         Nghĩ thật vui được làm kiếp con người
                     </span>
                 </div>

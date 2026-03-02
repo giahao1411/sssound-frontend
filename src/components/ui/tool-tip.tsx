@@ -16,12 +16,11 @@ export default function ToolTip({ anchorId, content, position }: ToolTipProps) {
             positionStrategy="fixed"
             delayShow={200}
             className="
-                bg-surface
-                text-xs
-                text-foreground
-                px-2 py-1
-                leading-none
-                shadow-sm
+                font-raleway
+                !text-xs
+                !px-2 !py-1
+                !leading-none
+                !shadow-sm
             "
         />
     );

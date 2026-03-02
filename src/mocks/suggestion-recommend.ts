@@ -29,6 +29,33 @@ export const mockSuggestions: Suggestion[] = [
         coverUrl: "https://picsum.photos/300?random=33",
         trackIds: ["t7", "t8"],
     },
+    {
+        id: "s4",
+        title: "When We All Fall Asleep, Where Do We Go?",
+        type: "Album",
+        artist: mockArtists[3],
+        description: "Eerie and innovative pop",
+        coverUrl: "https://picsum.photos/300?random=34",
+        trackIds: ["t9", "t10"],
+    },
+    {
+        id: "s5",
+        title: "Lo-fi Beats",
+        type: "Playlist",
+        artist: mockArtists[1],
+        description: "Chill vibes for coding",
+        coverUrl: "https://picsum.photos/300?random=35",
+        trackIds: ["t11", "t12", "t13", "t14"],
+    },
+    {
+        id: "s6",
+        title: "Top Hits 2024",
+        type: "Playlist",
+        artist: mockArtists[2],
+        description: "The biggest hits of the year",
+        coverUrl: "https://picsum.photos/300?random=36",
+        trackIds: ["t15", "t16", "t17", "t18"],
+    },
 ];
 
 /* ------------------ Recommend Tracks ------------------ */

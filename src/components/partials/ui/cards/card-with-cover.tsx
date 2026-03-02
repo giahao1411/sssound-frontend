@@ -21,7 +21,7 @@ export default function CardWithCover({ item }: CardWithCoverProps) {
 
     return (
         <div className="flex flex-col gap-2">
-            <span className="text-xs text-foreground-muted select-none">
+            <span className="font-osans text-xs text-foreground-muted select-none">
                 More like {item.artist.username}
             </span>
 
@@ -55,11 +55,11 @@ export default function CardWithCover({ item }: CardWithCoverProps) {
                         <div className="flex flex-col gap-2 text-white/80">
                             <Link
                                 to={`/track/${item.id}`}
-                                className="text-2xl font-semibold hover:underline"
+                                className="font-mplus text-2xl font-semibold hover:underline"
                             >
                                 {item.title}
                             </Link>
-                            <span className="text-xs">
+                            <span className="text-xs font-osans">
                                 <span className="text-gray-300">
                                     {item.type.charAt(0).toUpperCase() +
                                         item.type.slice(1)}{" "}
@@ -90,7 +90,7 @@ export default function CardWithCover({ item }: CardWithCoverProps) {
                             )}
                         >
                             <VolumeOff size={16} className="text-white/80" />
-                            <span className="text-xs text-white/80">
+                            <span className="font-osans text-xs text-white/80">
                                 Preview
                             </span>
                         </div>

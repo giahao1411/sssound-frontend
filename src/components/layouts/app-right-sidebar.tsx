@@ -13,7 +13,7 @@ export default function RightSidebar() {
         <aside
             className={cn(
                 "bg-surface flex flex-col transition-all duration-300",
-                open ? "lg:w-[275px] xl:w-[300px] 2xl:w-[350px]" : "w-[56px]",
+                open ? "lg:w-[300px] xl:w-[325px] 2xl:w-[375px]" : "w-[56px]",
                 !open && "hover:bg-surface-muted justify-center cursor-pointer",
             )}
             onClick={!open ? toggle : undefined}
@@ -38,7 +38,6 @@ export default function RightSidebar() {
                 <>
                     {/* header */}
                     <RightSidebarHeader
-                        title="Now Playing"
                         open={open}
                         isHover={isHover}
                         toggle={toggle}
