@@ -36,7 +36,7 @@ export default function FeedItemCard({ post }: FeedItemCardsProps) {
                     <span className="font-osans text-sm">
                         <Link
                             className="hover:underline"
-                            to={`/profile/${post.user.id}`}
+                            to={`/user/${post.user.id}`}
                         >
                             <strong>{post.user.username}</strong>
                         </Link>{" "}

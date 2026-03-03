@@ -1,8 +1,7 @@
 import PlayButton from "@/components/ui/play-button";
-import { usePlayTrack } from "@/hooks/use-play-track";
+import { usePlayMusic } from "@/hooks/use-play-music";
 import type { Album, Track } from "@/types";
-import { mapToAlbum } from "@/utils/map-to-album";
-import { mapToTrack } from "@/utils/map-to-track";
+import { getMedia } from "@/utils/get-media";
 import { formatDuration } from "@/utils/time-parser";
 import { Link } from "react-router-dom";
 
@@ -15,12 +14,9 @@ export default function TrackContent({
     item,
     isInModal = false,
 }: TrackContentProps) {
-    // check the item type to determine if it's a track or album
-    // then map it to a track for consistent handling
-    const media =
-        item.type === "Track" ? mapToTrack(item) : mapToAlbum(item).tracks[0];
+    const { media, mediaType } = getMedia(item);
 
-    const { isPlaying, handlePlay } = usePlayTrack(media);
+    const { isPlaying, handlePlay } = usePlayMusic(item);
 
     return (
         <div className="w-full flex items-center justify-between">
@@ -36,11 +32,16 @@ export default function TrackContent({
                 <div className="flex flex-col font-osans">
                     <Link
                         className="text-sm text-foreground-muted hover:underline"
-                        to={`/profile/${media.artist.id}`}
+                        to={`/user/${media.artist.id}`}
                     >
                         {media.artist.username}
                     </Link>
-                    <span className="font-bold">{media.title}</span>
+                    <Link
+                        to={`/${mediaType}/${media.id}`}
+                        className="font-bold hover:underline"
+                    >
+                        {media.title}
+                    </Link>
                 </div>
             </div>
 

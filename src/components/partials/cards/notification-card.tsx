@@ -19,12 +19,13 @@ export default function NotificationCard({
         notification.type === "LIKE_TRACK"
             ? notification.track
             : notification.album;
+    const mediaType = notification.type === "LIKE_TRACK" ? "track" : "album";
 
     return (
         <div className="flex items-center justify-between p-2 rounded-lg">
             <div className="flex items-center gap-4">
                 <Link
-                    to={`/profile/${notification.sender.id}`}
+                    to={`/user/${notification.sender.id}`}
                     className="cursor-pointer"
                 >
                     <img
@@ -37,14 +38,14 @@ export default function NotificationCard({
                 <div className="flex flex-col items-start text-xs font-osans">
                     <span>
                         <Link
-                            to={`/profile/${notification.sender.id}`}
+                            to={`/user/${notification.sender.id}`}
                             className="font-bold hover:underline"
                         >
                             {notification.sender.username}
                         </Link>{" "}
                         {content[notification.type]}{" "}
                         <Link
-                            to={`/media/${media.id}`}
+                            to={`/${mediaType}/${media.id}`}
                             className="font-bold hover:underline"
                         >
                             {media.title}

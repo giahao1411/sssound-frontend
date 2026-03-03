@@ -1,7 +1,7 @@
 import type { Track } from "@/types";
 import { create } from "zustand";
 
-type PlayTrackStore = {
+type PlayMusicStore = {
     track: Track | null;
     playing: boolean;
 
@@ -9,7 +9,7 @@ type PlayTrackStore = {
     toggle: () => void;
 };
 
-export const usePlayTrackStore = create<PlayTrackStore>((set) => ({
+export const usePlayMusicStore = create<PlayMusicStore>((set) => ({
     track: null,
     playing: false,
 
