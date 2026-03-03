@@ -40,7 +40,7 @@ export default function Home() {
             <div className="flex flex-col gap-3">
                 <span className={headerClassName}>Recently Played</span>
 
-                <div className="grid grid-cols-2 2xl:grid-cols-4 gap-2">
+                <div className="grid grid-cols-2 2xl:grid-cols-4 gap-4">
                     {filteredRecentPlayed.map((playlist) => (
                         <PlaylistCardRec
                             key={playlist.id}

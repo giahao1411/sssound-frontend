@@ -1,8 +1,8 @@
 import PlayButton from "@/components/ui/play-button";
-import { usePlayTrack } from "@/hooks/use-play-track";
+import { usePlayMusic } from "@/hooks/use-play-music";
 import { cn } from "@/lib/cn";
 import type { Suggestion } from "@/types";
-import { mapToTrack } from "@/utils/map-to-track";
+import { mapToAlbum } from "@/utils/map-to-album";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -11,13 +11,13 @@ interface PlaylistCardRecProps {
 }
 
 export default function PlaylistCardRec({ playlist }: PlaylistCardRecProps) {
-    const { isPlaying, handlePlay } = usePlayTrack(mapToTrack(playlist));
+    const { isPlaying, handlePlay } = usePlayMusic(mapToAlbum(playlist));
 
     const [isHovered, setIsHovered] = useState(false);
 
     return (
         <Link
-            to={`/user/playlist/${playlist.id}`}
+            to={`/playlist/${playlist.id}`}
             className={cn(
                 "flex items-center justify-between rounded-sm cursor-pointer",
                 "bg-surface-muted-hover/50 hover:opacity-80",

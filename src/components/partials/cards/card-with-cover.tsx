@@ -1,5 +1,5 @@
 import PlayButton from "@/components/ui/play-button";
-import { usePlayTrack } from "@/hooks/use-play-track";
+import { usePlayMusic } from "@/hooks/use-play-music";
 import { cn } from "@/lib/cn";
 import type { Suggestion } from "@/types";
 import { mapToTrack } from "@/utils/map-to-track";
@@ -15,7 +15,7 @@ const iconClassName =
     "text-white/70 hover:text-white hover:scale-103 transition-color";
 
 export default function CardWithCover({ item }: CardWithCoverProps) {
-    const { isPlaying, handlePlay } = usePlayTrack(mapToTrack(item));
+    const { isPlaying, handlePlay } = usePlayMusic(mapToTrack(item));
 
     const [isHovered, setIsHovered] = useState(false);
 
