@@ -33,7 +33,7 @@ export default function TrackContent({
                     isInModal={isInModal}
                 />
 
-                <div className="flex flex-col">
+                <div className="flex flex-col font-osans">
                     <Link
                         className="text-sm text-foreground-muted hover:underline"
                         to={`/profile/${media.artist.id}`}

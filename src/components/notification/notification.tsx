@@ -15,14 +15,18 @@ export default function Notification() {
     const [numberOfNotifications, setNumberOfNotifications] = useState(4);
     const [anyNotificationsLeft, setAnyNotificationsLeft] = useState(true);
 
+    const [isRepost, setIsRepost] = useState(false);
+
     const { notifications, posts, setNotifications, setPosts } =
         useSharedDataStore((state) => state);
-
-    const [isRepost, setIsRepost] = useState(false);
 
     const filteredNotifications = notifications
         .sort((a, b) => b.timestamp - a.timestamp)
         .slice(0, numberOfNotifications);
+
+    const filteredPosts = posts.filter((post) =>
+        isRepost ? post : !post.type.includes("REPOST"),
+    );
 
     const handleMoreNotifications = () => {
         if (anyNotificationsLeft) {
@@ -94,7 +98,7 @@ export default function Notification() {
 
                 {/* posts body */}
                 <div className="grid grid-cols-1 2xl:grid-cols-2 gap-10 py-6">
-                    {posts.map((post) => (
+                    {filteredPosts.map((post) => (
                         <FeedItemCard key={post.id} post={post} />
                     ))}
                 </div>
